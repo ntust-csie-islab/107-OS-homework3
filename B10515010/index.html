@@ -1,1 +1,213 @@
-homework not found!!
+<div id="doc" class="markdown-body container-fluid comment-enabled" style="position: relative;"><h1 id="107-OS-homework-3-實作Kernel-Service">107 OS homework 3 實作Kernel Service</h1><blockquote>
+<p>組長：B10515050、林八林<br>
+組員：B10515010、陳昀諒<br>
+組員：B10515048、柯名鴻<br>
+github: <a href="https://github.com/tonyman1008/xv6-public" target="_blank" rel="noopener">https://github.com/tonyman1008/xv6-public</a></p>
+</blockquote><hr><h1 id="🙂-使用情境說明包含流程圖">🙂 使用情境說明(包含流程圖)</h1><h2 id="情境說明">情境說明</h2><ul>
+<li>
+<h3 id="Copy-on-write">Copy-on-write</h3>
+</li>
+</ul><p>使用者在學習copy-on-write概時，設計三種不同教學課程，利用程式碼來讓使用者能充分理解。<br>
+在不同情境下呼叫system call時，getNumFreePage將回傳不同值。<br>
+三種程式碼分別展示了copy-on-write在fork時，對子行程及父行程變數各有何種改變效果。</p><ul>
+<li>
+<h3 id="流程圖">流程圖</h3>
+</li>
+</ul><p><img src="https://i.imgur.com/v9ySBNj.jpg" alt=""></p><hr><h1 id="😇-Demo畫面">😇 Demo畫面</h1><ul>
+<li>
+<h2 id="起始畫面">起始畫面</h2>
+</li>
+</ul><p><img src="https://i.imgur.com/eMOtjYT.png" alt=""></p><ul>
+<li>
+<h2 id="教程一0">教程一</h2>
+</li>
+</ul><p><img src="https://i.imgur.com/DQqokZn.png" alt=""></p><ul>
+<li>
+<h2 id="教程二0">教程二</h2>
+</li>
+</ul><p><img src="https://i.imgur.com/PL8CxzA.png" alt=""></p><ul>
+<li>
+<h2 id="教程三0">教程三</h2>
+</li>
+</ul><p><img src="https://i.imgur.com/dZsWeKG.png" alt=""></p><hr><h1 id="🏃-實作過程修改哪些檔案含圖片">🏃 實作過程(修改哪些檔案[含圖片])</h1><h2 id="程式運作流程">程式運作流程</h2><ul>
+<li>加入設計原因、程式運作流程及呼叫system call會產生的效果</li>
+<li>使用者充分理解copy-on-write在fork時對於子行程(child)及父行程(parent)的影響</li>
+</ul><h2 id="教程一：fork後，子行程修改資源內容，父行程內容不變">教程一：fork後，子行程修改資源內容，父行程內容不變</h2><p><img src="https://i.imgur.com/LqgUxva.png" alt=""></p><h2 id="教程二：fork後，父行程再次fork">教程二：fork後，父行程再次fork</h2><p><img src="https://i.imgur.com/rsiOjvk.png" alt=""></p><h2 id="教程三：讓子行程sleep，父行程優先執行">教程三：讓子行程sleep，父行程優先執行</h2><p><img src="https://i.imgur.com/VkBhABJ.png" alt=""></p><h2 id="修改過的檔案1">修改過的檔案</h2><h3 id="Makefile">Makefile</h3><pre><code>UPROGS=\
+...
+_CopyOnWrite\
+</code></pre><h3 id="CopyOnWritec">CopyOnWrite.c</h3><pre><code class="c hljs"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"types.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"stat.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"user.h"</span></span>
+
+<span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">tutorial1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"在還沒fork前free page數量：%d\n"</span><span class="token punctuation">,</span> <span class="token function">getNumFreePages</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"Parent 和 Child 共同使用一個全域變數 a \n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"========執行第一次fork========\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">int</span> pid <span class="token operator">=</span> <span class="token function">fork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>pid <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"Child: a = %d\n"</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"改變子行程a前free page數量：%d\n"</span><span class="token punctuation">,</span> <span class="token function">getNumFreePages</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		a <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"Child: a = %d\n"</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"第一次改變子行程a後free page數量：%d\n"</span><span class="token punctuation">,</span> <span class="token function">getNumFreePages</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		a <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"Child: a = %d\n"</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"第二次改變子行程a後free page數量：%d\n"</span><span class="token punctuation">,</span> <span class="token function">getNumFreePages</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token function">exit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"Parent: a = %d\n"</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"Parent: a = %d\n"</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"在等待子行程結束後free page數量：%d\n"</span><span class="token punctuation">,</span> <span class="token function">getNumFreePages</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">tutorial2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"在還沒fork前free page數量：%d\n"</span><span class="token punctuation">,</span> <span class="token function">getNumFreePages</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"========執行第一次fork========\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">fork</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"第一個子行程"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token function">exit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+	<span class="token keyword">else</span>
+	<span class="token punctuation">{</span>
+		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"在第二次fork前free page數量：%d\n"</span><span class="token punctuation">,</span> <span class="token function">getNumFreePages</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"========執行第二次fork========\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">fork</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+		<span class="token punctuation">{</span>
+			<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"第二個子行程"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"改變第二個子行程的a前free page數量：%d\n"</span><span class="token punctuation">,</span> <span class="token function">getNumFreePages</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			a <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+			<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"Child: a = %d\n"</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"改變第二個子行程的a後free page數量：%d\n"</span><span class="token punctuation">,</span> <span class="token function">getNumFreePages</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">exit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+		<span class="token function">wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"在第一個子行程結束後free page數量：%d\n"</span><span class="token punctuation">,</span> <span class="token function">getNumFreePages</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+	<span class="token function">wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"在第二個子行程結束後free page數量：%d\n"</span><span class="token punctuation">,</span> <span class="token function">getNumFreePages</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">tutorial3</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"在還沒fork前free page數量：%d\n"</span><span class="token punctuation">,</span> <span class="token function">getNumFreePages</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"========執行第一次fork========\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">int</span> pid <span class="token operator">=</span> <span class="token function">fork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>pid <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"讓子行程sleep 4秒\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"第一次改變子行程a前free page數量：%d\n"</span><span class="token punctuation">,</span> <span class="token function">getNumFreePages</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		a <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"Child: a = %d\n"</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"第一次改變子行程a後free page數量：%d\n"</span><span class="token punctuation">,</span> <span class="token function">getNumFreePages</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token function">exit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"在父行程結束前free page數量：%d\n"</span><span class="token punctuation">,</span> <span class="token function">getNumFreePages</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+
+	<span class="token comment">//1</span>
+	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"1.\n\
+   int a = 1;          #宣告一個全域變數a\n\
+   if(fork()==0)       #複製一個一子行程,fork==0代表子行程,fork==1代表父行程,使free page減少\n\
+   {  #此為子行程的內容\n\
+        a = 2;         #由於要寫入a,根據copy-on-write的概念,此時會複製出一份a,使free page減少\n\
+        a = 4;         #由於前一行已複製出一份a,此時修改並不會額外複製,free page不變\n\
+        exit();        #結束子行程\n\
+   }\n\
+    wait();            #等待子行程結束,若在此後輸出a,a的值並不會被改變\n\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token comment">//2</span>
+	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"2.\n\
+    int a = 1;         #宣告一個全域變數a\n\
+    if(fork()==0)      #複製一個一子行程,fork==0代表子行程,fork==1代表父行程,使free page減少\n\
+    {  #此為子行程的內容\n\
+        exit();        #結束第一個子行程,釋出free page\n\
+    }\n\
+    else  #執行第一個父行程\n\
+    {  #此為父行程的內容\n\
+        if(fork()==0)  #複製一個一子行程,此時原來的父行程將會被複製出第二份,因此會優先執行第一個子行程\n\
+        {\n\
+            a = 5;     #由於要寫入a,根據copy-on-write的概念,此時會複製出一份a,使free page減少\n\
+            exit();    #結束第二個子行程,釋出free page\n\
+        }\n\
+        wait();        #由於第一個子行程已經執行完畢,此時的wait沒有任何作用\n\
+    }\n\
+    wait();            #等待第二個子行程結束\n\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token comment">//3</span>
+	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"3.\n\
+    int a = 1;         #宣告一個全域變數a\n\
+    int pid = fork();  #複製一個一子行程,fork==0代表子行程,fork==1代表父行程\n\
+    if(pid==0)\n\
+    {  #此為子行程的內容\n\
+	sleep(4);      #sleep(4) 讓子行程先停止4秒再執行,因此先執行父行程\n\
+        a = 5;         #由於要寫入a,根據copy-on-write的概念,此時會複製出一份a,使free page減少\n\
+        exit();        #結束子行程,釋出free page\n\
+    }\n\
+    wait();            #等待子行程結束\n\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"請輸入數字1~3選擇詳細範例的教程,輸入4離開程式.\n\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">char</span> <span class="token operator">*</span>inputC<span class="token punctuation">;</span>
+	<span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		inputC <span class="token operator">=</span> <span class="token function">gets</span><span class="token punctuation">(</span><span class="token string">"9"</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">int</span> input <span class="token operator">=</span> <span class="token function">atoi</span><span class="token punctuation">(</span>inputC<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>input <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+		<span class="token punctuation">{</span>
+			<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"******************教程一******************\n\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">tutorial1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"\n****************教程結束******************\n\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+		<span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>input <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span>
+		<span class="token punctuation">{</span>
+			<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"******************教程二******************\n\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">tutorial2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"\n****************教程結束******************\n\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+		<span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>input <span class="token operator">==</span> <span class="token number">3</span><span class="token punctuation">)</span>
+		<span class="token punctuation">{</span>
+			<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"******************教程三******************\n\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">tutorial3</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"\n****************教程結束******************\n\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+		<span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>input <span class="token operator">==</span> <span class="token number">4</span><span class="token punctuation">)</span>
+		<span class="token punctuation">{</span>
+			<span class="token keyword">break</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+
+		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"選擇教程,請重新輸入：\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+	<span class="token function">exit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre><hr><h1 id="😎-結論">😎 結論</h1><p>Copy-on-write在兩個process使用到同一資源時，如果只是做"讀取"資料的動作，將不會佔用記憶體空間，因而free page數量並不會減少。一旦當某一process試圖"寫入"資料，才會真正copy一份專用副本給它。</p><p>所以，我們利用了system call來驗證copy-on-write概念，並設計了這個程式來讓使用者能輕鬆理解。總結一下copy-on-write的優點：</p><ul>
+<li>在對資料只做"讀取"操作(read-only)時，不會產生多餘的副本，能減少實體記憶體的空間。</li>
+</ul><p>但copy-on-write也是有缺點存在的，我們舉例出以下幾點：</p><ul>
+<li>
+<p>Page fault：<br>
+如果在fork之後，父行程及子行程皆持續執行"寫入"操作，那麼將會產生大量的page fault。</p>
+</li>
+<li>
+<p>數據一致問題：<br>
+fork之後，如果子行程執行"寫入"操作，同時又希望父行程讀取到"修改後的值"，將會發生錯誤，    copy-on-write只能讓資料最終一致，但不是隨時都一致，導致使用上的困難。</p>
+</li>
+</ul><hr><h1 id="📅-組員分工">📅 組員分工</h1><p>組長：B10515050、林八林：查詢資料、設計使用情境<br>
+組員：B10515010、陳昀諒：查詢資料、設計使用情境<br>
+組員：B10515048、柯名鴻：查詢資料、設計使用情境、撰寫報告</p><hr><div dir="ltr" class="resize-sensor" style="position: absolute; left: -10px; top: -10px; right: 0px; bottom: 0px; overflow: hidden; z-index: -1; visibility: hidden;"><div class="resize-sensor-expand" style="position: absolute; left: -10px; top: -10px; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;"><div style="position: absolute; left: 0px; top: 0px; transition: all 0s ease 0s; width: 100000px; height: 100000px;"></div></div><div class="resize-sensor-shrink" style="position: absolute; left: -10px; top: -10px; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;"><div style="position: absolute; left: 0; top: 0; transition: 0s; width: 200%; height: 200%"></div></div></div></div>
