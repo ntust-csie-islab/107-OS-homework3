@@ -34,11 +34,11 @@
 </head>
 
 <body>
-    <div id="doc" class="markdown-body container-fluid comment-enabled" style="position: relative;"><h1 id="107-OS-homework-3-實作Kernel-Service"><a class="anchor hidden-xs" href="#107-OS-homework-3-實作Kernel-Service" title="107-OS-homework-3-實作Kernel-Service"><span class="octicon octicon-link"></span></a>107 OS homework 3 實作Kernel Service</h1><blockquote>
+    <div id="doc" class="markdown-body container-fluid comment-enabled"><h1 id="107-OS-homework-3-實作Kernel-Service"><a class="anchor hidden-xs" href="#107-OS-homework-3-實作Kernel-Service" title="107-OS-homework-3-實作Kernel-Service"><span class="octicon octicon-link"></span></a>107 OS homework 3 實作Kernel Service</h1><blockquote>
 <p>組長：B10532032林少苗<br>
 組員：B10532002吳毓書<br>
 組員：B10532020鍾淯丞<br>
-github: <a href="https://github.com/VanillaFox2035/xv6-public" target="_blank" rel="noopener">https://github.com/VanillaFox2035/xv6-public</a></p>
+github: <a href="https://github.com/younger15/xv6-public" target="_blank" rel="noopener">https://github.com/younger15/xv6-public</a></p>
 </blockquote><hr><h1 id="🙂-使用情境說明包含流程圖"><a class="anchor hidden-xs" href="#🙂-使用情境說明包含流程圖" title="🙂-使用情境說明包含流程圖"><span class="octicon octicon-link"></span></a>🙂 使用情境說明(包含流程圖)</h1><hr><ul>
 <li><strong>應用程式：使用者登入畫面</strong><br>
 在系統啟動後須先進行使用者登入，包含帳戶、密碼驗證，之後才能進入系統做其他操作，重新利用了Homework 2 中 <code>changeUser</code> 這個 system call</li>
@@ -89,11 +89,13 @@ dec file_name key_string</p>
 </ul><p><img src="https://i.imgur.com/F5k6JER.png" alt=""></p><h1 id="🏃-實作過程修改哪些檔案含圖片"><a class="anchor hidden-xs" href="#🏃-實作過程修改哪些檔案含圖片" title="🏃-實作過程修改哪些檔案含圖片"><span class="octicon octicon-link"></span></a>🏃 實作過程(修改哪些檔案[含圖片])</h1><p>新增：<code>enc.c</code> <code>dec.c</code><br>
 修改：<code>cu.c</code> <code>au.c</code> <code>du.c</code> <code>ef.c</code> <code>Makefile</code></p><p>因為<code>UserList</code>檔案格式改了，加入密碼的紀錄，<code>cu.c</code>、<code>au.c</code>、<code>du.c</code>程式碼都有做小幅度更動</p><p><strong>cu.c (change user)</strong><br>
 新增了判斷密碼的部分<br>
-(缺圖)</p><p><strong>au.c (add user)</strong><br>
+<img src="https://i.imgur.com/cR6oy3g.png" alt=""><br>
+<img src="https://i.imgur.com/FS7eido.png" alt=""></p><p><strong>au.c (add user)</strong><br>
 新增了增加使用者時需要設定密碼<br>
-(缺圖)</p><p><strong>du.c (delete user)</strong><br>
+<img src="https://i.imgur.com/mGtC9Gv.png" alt=""></p><p><strong>du.c (delete user)</strong><br>
 功能未改變，但讀檔方式有修改<br>
-(缺圖)</p><p><strong>ef.c (edit file)</strong><br>
+<img src="https://i.imgur.com/YTdC8IG.png" alt=""><br>
+<img src="https://i.imgur.com/NkZjkCZ.png" alt=""></p><p><strong>ef.c (edit file)</strong><br>
 其中新增了ins (insert)、app (append)、del (delete)等功能</p><p>ins(插入字串)<br>
 <img src="https://i.imgur.com/dGbChum.png" alt=""></p><p>app(檔案尾部接上字串)<br>
 <img src="https://i.imgur.com/GXrlWqh.png" alt=""></p><p>del(刪除字串)<br>
@@ -105,7 +107,7 @@ dec file_name key_string</p>
 <li>鍾淯丞：資料查詢、Trace code、Debug</li>
 <li>吳毓書：撰寫程式碼、Debug</li>
 <li>林少苗：撰寫報告、繪製流程圖、資料查詢、Debug</li>
-</ul><hr><div dir="ltr" class="resize-sensor" style="position: absolute; left: -10px; top: -10px; right: 0px; bottom: 0px; overflow: hidden; z-index: -1; visibility: hidden;"><div class="resize-sensor-expand" style="position: absolute; left: -10px; top: -10px; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;"><div style="position: absolute; left: 0px; top: 0px; transition: all 0s ease 0s; width: 100000px; height: 100000px;"></div></div><div class="resize-sensor-shrink" style="position: absolute; left: -10px; top: -10px; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;"><div style="position: absolute; left: 0; top: 0; transition: 0s; width: 200%; height: 200%"></div></div></div></div>
+</ul><hr></div>
     <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
         <div class="pull-right dropdown">
             <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
@@ -113,8 +115,8 @@ dec file_name key_string</p>
             </a>
             <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
                 <div class="toc"><ul class="nav">
-<li class=""><a href="#107-OS-homework-3-實作Kernel-Service" title="107 OS homework 3 實作Kernel Service">107 OS homework 3 實作Kernel Service</a></li>
-<li class=""><a href="#🙂-使用情境說明包含流程圖" title="🙂 使用情境說明(包含流程圖)">🙂 使用情境說明(包含流程圖)</a></li>
+<li><a href="#107-OS-homework-3-實作Kernel-Service" title="107 OS homework 3 實作Kernel Service">107 OS homework 3 實作Kernel Service</a></li>
+<li><a href="#🙂-使用情境說明包含流程圖" title="🙂 使用情境說明(包含流程圖)">🙂 使用情境說明(包含流程圖)</a></li>
 <li class=""><a href="#😇-Demo畫面" title="😇 Demo畫面">😇 Demo畫面</a></li>
 <li class=""><a href="#🏃-實作過程修改哪些檔案含圖片" title="🏃 實作過程(修改哪些檔案[含圖片])">🏃 實作過程(修改哪些檔案[含圖片])</a></li>
 <li><a href="#😎-結論" title="😎 結論">😎 結論</a></li>
@@ -126,8 +128,8 @@ dec file_name key_string</p>
     </div>
     <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;"  >
         <div class="toc"><ul class="nav">
-<li class=""><a href="#107-OS-homework-3-實作Kernel-Service" title="107 OS homework 3 實作Kernel Service">107 OS homework 3 實作Kernel Service</a></li>
-<li class=""><a href="#🙂-使用情境說明包含流程圖" title="🙂 使用情境說明(包含流程圖)">🙂 使用情境說明(包含流程圖)</a></li>
+<li><a href="#107-OS-homework-3-實作Kernel-Service" title="107 OS homework 3 實作Kernel Service">107 OS homework 3 實作Kernel Service</a></li>
+<li><a href="#🙂-使用情境說明包含流程圖" title="🙂 使用情境說明(包含流程圖)">🙂 使用情境說明(包含流程圖)</a></li>
 <li class=""><a href="#😇-Demo畫面" title="😇 Demo畫面">😇 Demo畫面</a></li>
 <li class=""><a href="#🏃-實作過程修改哪些檔案含圖片" title="🏃 實作過程(修改哪些檔案[含圖片])">🏃 實作過程(修改哪些檔案[含圖片])</a></li>
 <li><a href="#😎-結論" title="😎 結論">😎 結論</a></li>
