@@ -89,11 +89,13 @@ dec file_name key_string</p>
 </ul><p><img alt="" src="https://i.imgur.com/F5k6JER.png"></p><h1 id="🏃-實作過程修改哪些檔案含圖片"><a title="🏃-實作過程修改哪些檔案含圖片" class="anchor hidden-xs" href="#🏃-實作過程修改哪些檔案含圖片"><span class="octicon octicon-link"></span></a>🏃 實作過程(修改哪些檔案[含圖片])</h1><p>新增：<code>enc.c</code> <code>dec.c</code><br>
 修改：<code>cu.c</code> <code>au.c</code> <code>du.c</code> <code>ef.c</code> <code>Makefile</code></p><p>因為<code>UserList</code>檔案格式改了，加入密碼的紀錄，<code>cu.c</code>、<code>au.c</code>、<code>du.c</code>程式碼都有做小幅度更動</p><p><strong>cu.c (change user)</strong><br>
 新增了判斷密碼的部分<br>
-(缺圖)</p><p><strong>au.c (add user)</strong><br>
+<img alt="" src="https://i.imgur.com/cR6oy3g.png"><br>
+<img alt="" src="https://i.imgur.com/FS7eido.png"></p><p><strong>au.c (add user)</strong><br>
 新增了增加使用者時需要設定密碼<br>
-(缺圖)</p><p><strong>du.c (delete user)</strong><br>
+<img alt="" src="https://i.imgur.com/mGtC9Gv.png"></p><p><strong>du.c (delete user)</strong><br>
 功能未改變，但讀檔方式有修改<br>
-(缺圖)</p><p><strong>ef.c (edit file)</strong><br>
+<img alt="" src="https://i.imgur.com/YTdC8IG.png"><br>
+<img alt="" src="https://i.imgur.com/NkZjkCZ.png"></p><p><strong>ef.c (edit file)</strong><br>
 其中新增了ins (insert)、app (append)、del (delete)等功能</p><p>ins(插入字串)<br>
 <img alt="" src="https://i.imgur.com/dGbChum.png"></p><p>app(檔案尾部接上字串)<br>
 <img alt="" src="https://i.imgur.com/GXrlWqh.png"></p><p>del(刪除字串)<br>
