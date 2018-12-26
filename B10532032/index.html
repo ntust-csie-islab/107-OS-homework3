@@ -1,1 +1,74 @@
-homework not found!!
+<div id="doc" class="markdown-body container-fluid comment-enabled"><h1 id="107-OS-homework-3-實作Kernel-Service">107 OS homework 3 實作Kernel Service</h1><blockquote>
+<p>組長：B10532032林少苗<br>
+組員：B10532002吳毓書<br>
+組員：B10532020鍾淯丞<br>
+github: <a href="https://github.com/B10532032/xv6-public" target="_blank" rel="noopener">https://github.com/B10532032/xv6-public</a></p>
+</blockquote><hr><h1 id="🙂-使用情境說明包含流程圖">🙂 使用情境說明(包含流程圖)</h1><hr><ul>
+<li><strong>應用程式：使用者登入畫面</strong><br>
+在系統啟動後須先進行使用者登入，包含帳戶、密碼驗證，之後才能進入系統做其他操作，重新利用了Homework 2 中 <code>changeUser</code> 這個 system call</li>
+</ul><p>使用方法：</p><blockquote>
+<p>Please enter your user name &amp; password.<br>
+User name: my_user_name<br>
+Password: my_password</p>
+</blockquote><p>流程圖：<br>
+<img src="https://i.imgur.com/unAlW2X.jpg" alt=""></p><ul>
+<li><strong>應用程式：檔案編輯與權限</strong><br>
+新增多項檔案編輯功能，與使用者權限做連結，需要有權限的人才能編輯檔案</li>
+</ul><p>使用方法：</p><blockquote>
+<p>使用ef指令來編輯檔案：</p>
+<blockquote>
+<p>讀檔：<br>
+ef file_name rd</p>
+<p>寫檔：<br>
+ef file_name wr my_content</p>
+<p>插入字串：<br>
+ef file_name ins 8(insert_position) my_content</p>
+<p>連接字串：<br>
+ef file_name app my_content</p>
+<p>刪除字串：<br>
+ef file_name del 8(delete_position) 10(delete_amount)</p>
+</blockquote>
+<p>使用enc指令對當案內容加密，使別人無法看到原檔案內容：</p>
+<blockquote>
+<p>檔案加密：<br>
+enc file_name key_string</p>
+</blockquote>
+<p>使用dec指令對原本已經加密的檔案解密，還原檔案內容：</p>
+<blockquote>
+<p>檔案解密：<br>
+dec file_name key_string</p>
+</blockquote>
+</blockquote><h1 id="😇-Demo畫面">😇 Demo畫面</h1><hr><ul>
+<li>先要求使用者輸入帳號密碼，然後才能進入到系統使用主要的功能</li>
+</ul><p><img src="https://i.imgur.com/eQLsOr8.png" alt=""></p><ul>
+<li>用ef的int指令在檔案中插入字串</li>
+</ul><p><img src="https://i.imgur.com/SGdsdqX.png" alt=""></p><ul>
+<li>用ef的app指令在檔案後插入字串</li>
+</ul><p><img src="https://i.imgur.com/dn4Ufig.png" alt=""></p><ul>
+<li>用ef的app指令在檔案中刪除字串</li>
+</ul><p><img src="https://i.imgur.com/15LPBIH.png" alt=""></p><ul>
+<li>用enc指令對檔案內容加密</li>
+</ul><p><img src="https://i.imgur.com/ccNQAjo.png" alt=""></p><ul>
+<li>用dec指令對檔案內容解密</li>
+</ul><p><img src="https://i.imgur.com/F5k6JER.png" alt=""></p><h1 id="🏃-實作過程修改哪些檔案含圖片">🏃 實作過程(修改哪些檔案[含圖片])</h1><p>新增：<code>enc.c</code> <code>dec.c</code><br>
+修改：<code>cu.c</code> <code>au.c</code> <code>du.c</code> <code>ef.c</code> <code>Makefile</code></p><p>因為<code>UserList</code>檔案格式改了，加入密碼的紀錄，<code>cu.c</code>、<code>au.c</code>、<code>du.c</code>程式碼都有做小幅度更動</p><p><strong>cu.c (change user)</strong><br>
+新增了判斷密碼的部分<br>
+<img src="https://i.imgur.com/cR6oy3g.png" alt=""><br>
+<img src="https://i.imgur.com/FS7eido.png" alt=""></p><p><strong>au.c (add user)</strong><br>
+新增了增加使用者時需要設定密碼<br>
+<img src="https://i.imgur.com/mGtC9Gv.png" alt=""></p><p><strong>du.c (delete user)</strong><br>
+功能未改變，但讀檔方式有修改<br>
+<img src="https://i.imgur.com/YTdC8IG.png" alt=""><br>
+<img src="https://i.imgur.com/NkZjkCZ.png" alt=""></p><p><strong>ef.c (edit file)</strong><br>
+其中新增了ins (insert)、app (append)、del (delete)等功能</p><p>ins(插入字串)<br>
+<img src="https://i.imgur.com/dGbChum.png" alt=""></p><p>app(檔案尾部接上字串)<br>
+<img src="https://i.imgur.com/GXrlWqh.png" alt=""></p><p>del(刪除字串)<br>
+<img src="https://i.imgur.com/03H90Bg.png" alt=""></p><p><strong>enc.c (encode)</strong><br>
+能夠對檔案內容作加密功能，使用的演算法為Vigenère auto key<br>
+<img src="https://i.imgur.com/tjFpDfp.png" alt=""></p><p><strong>dec.c (decode)</strong><br>
+能夠對檔案內容作解密功能，使用的演算法為Vigenère auto key<br>
+<img src="https://i.imgur.com/RfNn9AC.png" alt=""></p><hr><h1 id="😎-結論">😎 結論</h1><p>這次實作了xv6的登入、使用者權限和加密的功能，讓xv6的操作能夠多一層資安的保護。光是實作增加改變使用者這個功能，前前後後修改了快十個檔案。透過這次的作業，讓我們能夠更加了解OS背後運作的原理，相信在不遠的將來，修改OS的能力能讓我們在工作上有所幫助。</p><hr><h1 id="📅-組員分工">📅 組員分工</h1><ul>
+<li>鍾淯丞：資料查詢、Trace code、Debug</li>
+<li>吳毓書：撰寫程式碼、Debug</li>
+<li>林少苗：撰寫報告、繪製流程圖、資料查詢、Debug</li>
+</ul><hr></div>
