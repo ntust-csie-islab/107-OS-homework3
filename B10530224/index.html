@@ -43,11 +43,17 @@ github: <a href="https://github.com/splitline/xv6-public" target="_blank" rel="n
 我們希望將繁瑣的登入步驟（輸入帳號密碼）等工作簡化成感應悠遊卡，如同圖書館的借書系統只需要悠遊卡即可快速借書。但為了保護學生證被拷貝或遺失的狀態，我們也提供了額外的保護。</p><p>基於我們作業二所建立的檔案權限系統我們將登入分為兩個層次：</p><ol>
 <li>開機時以學生證登入系統：只能使用 other 權限允許的內容，如： <code>------rwx</code></li>
 <li>若要讀取私人權限的檔案或system call，則需要使用 sudo 另外輸入密碼。</li>
-</ol><p><img src="https://i.imgur.com/Xuz9U2P.png" alt=""></p><p><img src="https://i.imgur.com/9lzIi2q.png" alt=""></p><p><em>商借到的 RFID 讀卡機</em><br>
-<img src="https://i.imgur.com/TA7LVDy.jpg" alt="" width="300"></p><hr><h1 id="-Demo畫面"><a class="anchor hidden-xs" href="#-Demo畫面" title="-Demo畫面"><span class="octicon octicon-link"></span></a><img alt=":joy:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/joy.png" title=":joy:"> Demo畫面</h1><h3 id="開機後顯示請刷學生證"><a class="anchor hidden-xs" href="#開機後顯示請刷學生證" title="開機後顯示請刷學生證"><span class="octicon octicon-link"></span></a>開機後顯示請刷學生證</h3><p><img src="https://i.imgur.com/BdrCcNk.jpg" alt=""></p><hr><h1 id="-實作過程修改哪些檔案含圖片"><a class="anchor hidden-xs" href="#-實作過程修改哪些檔案含圖片" title="-實作過程修改哪些檔案含圖片"><span class="octicon octicon-link"></span></a><img alt=":joy:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/joy.png" title=":joy:"> 實作過程(修改哪些檔案[含圖片])</h1><p>基於 HW2 的基本建設下，我們又新加入了：</p><ol>
+</ol><p><img src="https://i.imgur.com/pz0FVi9.png" alt=""></p><p><img src="https://i.imgur.com/6rqvFWI.png" alt=""></p><p><em>商借到的 RFID 讀卡機</em><br>
+<img src="https://i.imgur.com/TA7LVDy.jpg" alt="" width="300"></p><hr><h1 id="-Demo畫面"><a class="anchor hidden-xs" href="#-Demo畫面" title="-Demo畫面"><span class="octicon octicon-link"></span></a><img alt=":joy:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/joy.png" title=":joy:"> Demo畫面</h1><h3 id="開機後顯示請刷學生證"><a class="anchor hidden-xs" href="#開機後顯示請刷學生證" title="開機後顯示請刷學生證"><span class="octicon octicon-link"></span></a>開機後顯示請刷學生證</h3><p><img src="https://i.imgur.com/BdrCcNk.jpg" alt=""></p><p><img src="https://i.imgur.com/e9isocp.gif" alt=""></p><h4 id="USER-SPLITLINE-登入"><a class="anchor hidden-xs" href="#USER-SPLITLINE-登入" title="USER-SPLITLINE-登入"><span class="octicon octicon-link"></span></a>USER <code>SPLITLINE</code> 登入</h4><blockquote>
+<p>登入系統，寫入一個檔案meow，讀取檔案meow，修改權限為 770（Other 沒任何權限）</p>
+</blockquote><p><img src="https://i.imgur.com/sfyg1HE.png" alt=""></p><h4 id="USER-HANK-登入"><a class="anchor hidden-xs" href="#USER-HANK-登入" title="USER-HANK-登入"><span class="octicon octicon-link"></span></a>USER <code>HANK</code> 登入</h4><blockquote>
+<p>ls （可以看到 meow 權限已被修改為 770）<br>
+欲讀取、寫入meow檔案卻被阻止了 <img alt=":cry:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/cry.png" title=":cry:"></p>
+</blockquote><p><img src="https://i.imgur.com/pzgC5LU.png" alt=""></p><hr><h1 id="-實作過程修改哪些檔案含圖片"><a class="anchor hidden-xs" href="#-實作過程修改哪些檔案含圖片" title="-實作過程修改哪些檔案含圖片"><span class="octicon octicon-link"></span></a><img alt=":joy:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/joy.png" title=":joy:"> 實作過程(修改哪些檔案[含圖片])</h1><p>基於 HW2 的基本建設下，我們又新加入了：</p><ol>
 <li>實作輸入學生證</li>
 <li>輸入密碼時不顯示</li>
-<li>檔案權限</li>
+<li>讀、寫、執行的檔案權限</li>
+<li>IO</li>
 </ol><p>修改：</p><ul>
 <li>
 <p>console.c</p>
@@ -130,7 +136,11 @@ github: <a href="https://github.com/splitline/xv6-public" target="_blank" rel="n
 <li class=""><a href="#107-OS-homework-3-實作" title="107 OS homework 3 實作">107 OS homework 3 實作</a></li>
 <li class=""><a href="#-使用情境說明包含流程圖" title=" 使用情境說明(包含流程圖)"> 使用情境說明(包含流程圖)</a></li>
 <li class=""><a href="#-Demo畫面" title=" Demo畫面"> Demo畫面</a><ul class="nav">
-<li class=""><a href="#開機後顯示請刷學生證" title="開機後顯示請刷學生證">開機後顯示請刷學生證</a></li>
+<li class=""><a href="#開機後顯示請刷學生證" title="開機後顯示請刷學生證">開機後顯示請刷學生證</a><ul class="nav">
+<li class=""><a href="#USER-SPLITLINE-登入" title="USER SPLITLINE 登入">USER SPLITLINE 登入</a></li>
+<li class=""><a href="#USER-HANK-登入" title="USER HANK 登入">USER HANK 登入</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class=""><a href="#-實作過程修改哪些檔案含圖片" title=" 實作過程(修改哪些檔案[含圖片])"> 實作過程(修改哪些檔案[含圖片])</a></li>
@@ -146,10 +156,14 @@ github: <a href="https://github.com/splitline/xv6-public" target="_blank" rel="n
     </div>
     <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;"  >
         <div class="toc"><ul class="nav">
-<li><a href="#107-OS-homework-3-實作" title="107 OS homework 3 實作">107 OS homework 3 實作</a></li>
+<li class=""><a href="#107-OS-homework-3-實作" title="107 OS homework 3 實作">107 OS homework 3 實作</a></li>
 <li class=""><a href="#-使用情境說明包含流程圖" title=" 使用情境說明(包含流程圖)"> 使用情境說明(包含流程圖)</a></li>
 <li class=""><a href="#-Demo畫面" title=" Demo畫面"> Demo畫面</a><ul class="nav">
-<li class=""><a href="#開機後顯示請刷學生證" title="開機後顯示請刷學生證">開機後顯示請刷學生證</a></li>
+<li class=""><a href="#開機後顯示請刷學生證" title="開機後顯示請刷學生證">開機後顯示請刷學生證</a><ul class="nav">
+<li class=""><a href="#USER-SPLITLINE-登入" title="USER SPLITLINE 登入">USER SPLITLINE 登入</a></li>
+<li class=""><a href="#USER-HANK-登入" title="USER HANK 登入">USER HANK 登入</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class=""><a href="#-實作過程修改哪些檔案含圖片" title=" 實作過程(修改哪些檔案[含圖片])"> 實作過程(修改哪些檔案[含圖片])</a></li>
