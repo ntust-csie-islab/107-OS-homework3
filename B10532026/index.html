@@ -1,1 +1,649 @@
-homework not found!!
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>
+        107 OS homework 3 實作Kernel Service - HackMD
+    </title>
+    <link rel="icon" type="image/png" href="https://hackmd.io/favicon.png">
+    <link rel="apple-touch-icon" href="https://hackmd.io/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" integrity="sha256-3iu9jgsy9TpTwXKb7bNQzqWekRX7pPK+2OLj3R922fo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css" integrity="sha256-QiWfLIsCT02Sdwkogf6YMiQlj4NE84MKkzEMkZnMGdg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css" integrity="sha256-vtR0hSWRc3Tb26iuN2oZHt3KRUomwTufNIf5/4oeCyg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/css/basic/emojify.min.css" integrity="sha256-UOrvMOsSDSrW6szVLe8ZDZezBxh5IoIfgTwdNDgTjiU=" crossorigin="anonymous" />
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i|Source+Code+Pro:300,400,500|Source+Sans+Pro:300,300i,400,400i,600,600i|Source+Serif+Pro&subset=latin-ext);.hljs{display:block;background:#fff;padding:.5em;color:#333;overflow-x:auto}.hljs-comment,.hljs-meta{color:#969896}.hljs-emphasis,.hljs-quote,.hljs-string,.hljs-strong,.hljs-template-variable,.hljs-variable{color:#df5000}.hljs-keyword,.hljs-selector-tag,.hljs-type{color:#a71d5d}.hljs-attribute,.hljs-bullet,.hljs-literal,.hljs-number,.hljs-symbol{color:#0086b3}.hljs-built_in,.hljs-builtin-name{color:#005cc5}.hljs-name,.hljs-section{color:#63a35c}.hljs-tag{color:#333}.hljs-attr,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-selector-pseudo,.hljs-title{color:#795da3}.hljs-addition{color:#55a532;background-color:#eaffea}.hljs-deletion{color:#bd2c00;background-color:#ffecec}.hljs-link{text-decoration:underline}.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.5;word-wrap:break-word}.markdown-body:after,.markdown-body:before{display:table;content:""}.markdown-body:after{clear:both}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body .absent{color:#c00}.markdown-body .anchor{float:left;padding-right:4px;margin-left:-20px;line-height:1}.markdown-body .anchor:focus{outline:none}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}.markdown-body hr{height:.25em;padding:0;margin:24px 0;background-color:#e7e7e7;border:0}.markdown-body blockquote{font-size:16px;padding:0 1em;color:#777;border-left:.25em solid #ddd}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body .loweralpha{list-style-type:lower-alpha}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}.markdown-body h1 .octicon-link,.markdown-body h2 .octicon-link,.markdown-body h3 .octicon-link,.markdown-body h4 .octicon-link,.markdown-body h5 .octicon-link,.markdown-body h6 .octicon-link{color:#000;vertical-align:middle;visibility:hidden}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{text-decoration:none}.markdown-body h1:hover .anchor .octicon-link,.markdown-body h2:hover .anchor .octicon-link,.markdown-body h3:hover .anchor .octicon-link,.markdown-body h4:hover .anchor .octicon-link,.markdown-body h5:hover .anchor .octicon-link,.markdown-body h6:hover .anchor .octicon-link{visibility:visible}.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt{font-size:inherit}.markdown-body h1{font-size:2em}.markdown-body h1,.markdown-body h2{padding-bottom:.3em;border-bottom:1px solid #eee}.markdown-body h2{font-size:1.5em}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{font-size:.85em;color:#777}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol.no-list,.markdown-body ul.no-list{padding:0;list-style-type:none}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body li>p{margin-top:16px}.markdown-body li+li{margin-top:.25em}.markdown-body dl{padding:0}.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}.markdown-body dl dd{padding:0 16px;margin-bottom:16px}.markdown-body table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}.markdown-body table th{font-weight:700}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #ddd}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.markdown-body img{max-width:100%;box-sizing:content-box;background-color:#fff}.markdown-body img[align=right]{padding-left:20px}.markdown-body img[align=left]{padding-right:20px}.markdown-body .emoji{max-width:none;vertical-align:text-top;background-color:transparent}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{display:block;float:left;width:auto;padding:7px;margin:13px 0 0;overflow:hidden;border:1px solid #ddd}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{display:block;padding:5px 0 0;clear:both;color:#333}.markdown-body span.align-center{display:block;overflow:hidden;clear:both}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{display:block;overflow:hidden;clear:both}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}.markdown-body code:after,.markdown-body code:before,.markdown-body tt:after,.markdown-body tt:before{letter-spacing:-.2em;content:"\00a0"}.markdown-body code br,.markdown-body tt br{display:none}.markdown-body del code{text-decoration:inherit}.markdown-body pre{word-wrap:normal}.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.markdown-body pre code,.markdown-body pre tt{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body pre code:after,.markdown-body pre code:before,.markdown-body pre tt:after,.markdown-body pre tt:before{content:normal}.markdown-body .csv-data td,.markdown-body .csv-data th{padding:5px;overflow:hidden;font-size:12px;line-height:1;text-align:left;white-space:nowrap}.markdown-body .csv-data .blob-line-num{padding:10px 8px 9px;text-align:right;background:#fff;border:0}.markdown-body .csv-data tr{border-top:0}.markdown-body .csv-data th{font-weight:700;background:#f8f8f8;border-top:0}.markdown-body kbd{display:inline-block;padding:3px 5px;font-size:11px;line-height:10px;color:#555;vertical-align:middle;background-color:#fcfcfc;border:1px solid #ccc;border-bottom-color:#bbb;border-radius:3px;box-shadow:inset 0 -1px 0 #bbb}.news .alert .markdown-body blockquote{padding:0 0 0 40px;border:0 none}.activity-tab .news .alert .commits,.activity-tab .news .markdown-body blockquote{padding-left:0}.task-list-item{list-style-type:none}.task-list-item label{font-weight:400}.task-list-item.enabled label{cursor:pointer}.task-list-item+.task-list-item{margin-top:3px}.task-list-item-checkbox{float:left;margin:.31em 0 .2em -1.3em!important;vertical-align:middle;cursor:default!important}.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;padding-top:40px;padding-bottom:40px;max-width:758px;overflow:visible!important}.markdown-body .emoji{vertical-align:top}.markdown-body pre{border:inherit!important}.markdown-body code{color:inherit!important}.markdown-body pre code .wrapper{display:-moz-inline-flex;display:-ms-inline-flex;display:-o-inline-flex;display:inline-flex}.markdown-body pre code .gutter{float:left;overflow:hidden;-webkit-user-select:none;user-select:none}.markdown-body pre code .gutter.linenumber{text-align:right;position:relative;display:inline-block;cursor:default;z-index:4;padding:0 8px 0 0;min-width:20px;box-sizing:content-box;color:#afafaf!important;border-right:3px solid #6ce26c!important}.markdown-body pre code .gutter.linenumber>span:before{content:attr(data-linenumber)}.markdown-body pre code .code{float:left;margin:0 0 0 16px}.markdown-body .gist .line-numbers{border-left:none;border-top:none;border-bottom:none}.markdown-body .gist .line-data{border:none}.markdown-body .gist table{border-spacing:0;border-collapse:inherit!important}.markdown-body code[data-gist-id]{background:none;padding:0}.markdown-body code[data-gist-id]:after,.markdown-body code[data-gist-id]:before{content:""}.markdown-body code[data-gist-id] .blob-num{border:unset}.markdown-body code[data-gist-id] table{overflow:unset;margin-bottom:unset}.markdown-body code[data-gist-id] table tr{background:unset}.markdown-body[dir=rtl] pre{direction:ltr}.markdown-body[dir=rtl] code{direction:ltr;unicode-bidi:embed}.markdown-body .alert>p{margin-bottom:0}.markdown-body pre.abc,.markdown-body pre.flow-chart,.markdown-body pre.graphviz,.markdown-body pre.mermaid,.markdown-body pre.sequence-diagram{text-align:center;background-color:inherit;border-radius:0;white-space:inherit}.markdown-body pre.abc>code,.markdown-body pre.flow-chart>code,.markdown-body pre.graphviz>code,.markdown-body pre.mermaid>code,.markdown-body pre.sequence-diagram>code{text-align:left}.markdown-body pre.abc>svg,.markdown-body pre.flow-chart>svg,.markdown-body pre.graphviz>svg,.markdown-body pre.mermaid>svg,.markdown-body pre.sequence-diagram>svg{max-width:100%;height:100%}.markdown-body pre>code.wrap{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}.markdown-body .alert>p,.markdown-body .alert>ul{margin-bottom:0}.markdown-body summary{display:list-item}.markdown-body summary:focus{outline:none}.markdown-body details summary{cursor:pointer}.markdown-body details:not([open])>:not(summary){display:none}.markdown-body figure{margin:1em 40px}.markdown-body .mark,.markdown-body mark{background-color:#fff1a7}.vimeo,.youtube{cursor:pointer;display:table;text-align:center;background-position:50%;background-repeat:no-repeat;background-size:contain;background-color:#000;overflow:hidden}.vimeo,.youtube{position:relative;width:100%}.youtube{padding-bottom:56.25%}.vimeo img{width:100%;object-fit:contain;z-index:0}.youtube img{object-fit:cover;z-index:0}.vimeo iframe,.youtube iframe,.youtube img{width:100%;height:100%;position:absolute;top:0;left:0}.vimeo iframe,.youtube iframe{vertical-align:middle;z-index:1}.vimeo .icon,.youtube .icon{position:absolute;height:auto;width:auto;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;opacity:.3;transition:opacity .2s;z-index:0}.vimeo:hover .icon,.youtube:hover .icon{opacity:.6;transition:opacity .2s}.slideshare .inner,.speakerdeck .inner{position:relative;width:100%}.slideshare .inner iframe,.speakerdeck .inner iframe{position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%}.MJX_Assistive_MathML{display:none}.ui-infobar{position:relative;z-index:2;max-width:760px;margin:25px auto -25px;padding:0 15px;color:#777}.toc .invisable-node{list-style-type:none}.ui-toc{position:fixed;bottom:20px;z-index:998}.ui-toc-label{opacity:.3;background-color:#ccc;border:none;transition:opacity .2s}.ui-toc .open .ui-toc-label{opacity:1;color:#fff;transition:opacity .2s}.ui-toc-label:focus{opacity:.3;background-color:#ccc;color:#000}.ui-toc-label:hover{opacity:1;background-color:#ccc;transition:opacity .2s}.ui-toc-dropdown{margin-top:23px;margin-bottom:20px;padding-left:10px;padding-right:10px;max-width:45vw;width:25vw;max-height:70vh;overflow:auto;text-align:inherit}.ui-toc-dropdown>.toc{max-height:calc(70vh - 100px);overflow:auto}.ui-toc-dropdown[dir=rtl] .nav{padding-right:0;letter-spacing:.0029em}.ui-toc-dropdown a{overflow:hidden;text-overflow:ellipsis;white-space:pre}.ui-toc-dropdown .nav>li>a{display:block;padding:4px 20px;font-size:13px;font-weight:500;color:#767676}.ui-toc-dropdown .nav>li:first-child:last-child > ul,.ui-toc-dropdown .toc.expand ul{display:block}.ui-toc-dropdown .nav>li>a:focus,.ui-toc-dropdown .nav>li>a:hover{padding-left:19px;color:#000;text-decoration:none;background-color:transparent;border-left:1px solid #000}.ui-toc-dropdown[dir=rtl] .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav>li>a:hover{padding-right:19px;border-left:none;border-right:1px solid #000}.ui-toc-dropdown .nav>.active:focus>a,.ui-toc-dropdown .nav>.active:hover>a,.ui-toc-dropdown .nav>.active>a{padding-left:18px;font-weight:700;color:#000;background-color:transparent;border-left:2px solid #000}.ui-toc-dropdown[dir=rtl] .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav>.active>a{padding-right:18px;border-left:none;border-right:2px solid #000}.ui-toc-dropdown .nav .nav{display:none;padding-bottom:10px}.ui-toc-dropdown .nav>.active>ul{display:block}.ui-toc-dropdown .nav .nav>li>a{padding-top:1px;padding-bottom:1px;padding-left:30px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a{padding-right:30px}.ui-toc-dropdown .nav .nav>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:40px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a{padding-right:40px}.ui-toc-dropdown .nav .nav>li>a:focus,.ui-toc-dropdown .nav .nav>li>a:hover{padding-left:29px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:hover{padding-right:29px}.ui-toc-dropdown .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>a:hover{padding-left:39px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:hover{padding-right:39px}.ui-toc-dropdown .nav .nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>a{padding-left:28px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>a{padding-right:28px}.ui-toc-dropdown .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>a{padding-left:38px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>a{padding-right:38px}.markdown-body[lang^=ja]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ\ ゴシック,sans-serif}.ui-toc-dropdown[lang^=ja]{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,ＭＳ\ Ｐゴシック,sans-serif}.markdown-body[lang=zh-tw]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}.ui-toc-dropdown[lang=zh-tw]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,微軟正黑UI,sans-serif}.markdown-body[lang=zh-cn]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}.ui-toc-dropdown[lang=zh-cn]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,微软雅黑UI,sans-serif}.ui-affix-toc{position:fixed;top:0;max-width:15vw;max-height:70vh;overflow:auto}.back-to-top,.expand-toggle,.go-to-bottom{display:block;padding:4px 10px;margin-top:10px;margin-left:10px;font-size:12px;font-weight:500;color:#999}.back-to-top:focus,.back-to-top:hover,.expand-toggle:focus,.expand-toggle:hover,.go-to-bottom:focus,.go-to-bottom:hover{color:#563d7c;text-decoration:none}.back-to-top,.go-to-bottom{margin-top:0}.ui-user-icon{width:20px;height:20px;display:block;border-radius:3px;margin-top:2px;margin-bottom:2px;margin-right:5px;background-position:50%;background-repeat:no-repeat;background-size:contain}.ui-user-icon.small{width:18px;height:18px;display:inline-block;vertical-align:middle;margin:0 0 .2em}.ui-infobar>small>span{line-height:22px}.ui-infobar>small .dropdown{display:inline-block}.ui-infobar>small .dropdown a:focus,.ui-infobar>small .dropdown a:hover{text-decoration:none}.unselectable{-webkit-user-select:none;-o-user-select:none;user-select:none}@media print{blockquote,div,img,pre,table{page-break-inside:avoid!important}a[href]:after{font-size:12px!important}}.markdown-body.slides{position:relative;z-index:1;color:#222}.markdown-body.slides:before{content:"";display:block;position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;background-color:currentColor;box-shadow:0 0 0 50vw}.markdown-body.slides section[data-markdown]{position:relative;margin-bottom:1.5em;background-color:#fff;text-align:center}.markdown-body.slides section[data-markdown] code{text-align:left}.markdown-body.slides section[data-markdown]:before{content:"";display:block;padding-bottom:56.23%}.markdown-body.slides section[data-markdown]>div:first-child{position:absolute;top:50%;left:1em;right:1em;transform:translateY(-50%);max-height:100%;overflow:hidden}.markdown-body.slides section[data-markdown]>ul{display:inline-block}.markdown-body.slides>section>section+section:after{content:"";position:absolute;top:-1.5em;right:1em;height:1.5em;border:3px solid #777}body{font-smoothing:subpixel-antialiased!important;-webkit-font-smoothing:subpixel-antialiased!important;-moz-osx-font-smoothing:auto!important;text-shadow:0 0 1em transparent,1px 1px 1.2px rgba(0,0,0,.004);-webkit-overflow-scrolling:touch;font-family:Source Sans Pro,Helvetica,Arial,sans-serif;letter-spacing:.025em}.focus,:focus{outline:none!important}::-moz-focus-inner{border:0!important}body.modal-open{overflow-y:auto;padding-right:0!important}
+    </style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js" integrity="sha256-8E4Is26QH0bD52WoQpcB+R/tcWQtpzlCojrybUd7Mxo=" crossorigin="anonymous"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="doc" class="markdown-body container-fluid comment-enabled" style="position: relative;"><h1 id="107-OS-homework-3-實作Kernel-Service"><a class="anchor hidden-xs" href="#107-OS-homework-3-實作Kernel-Service" title="107-OS-homework-3-實作Kernel-Service" data-vivaldi-spatnav-clickable="1"><span class="octicon octicon-link"></span></a>107 OS homework 3 實作Kernel Service</h1><blockquote>
+<p>組長：B10532026 于兆良<br>
+組員：B10532016 楊泓彬<br>
+組員：B10532008 黃信恩<br>
+github: <a href="https://github.com/Petingo/107-OS-hw3" target="_blank" rel="noopener">https://github.com/Petingo/107-OS-hw3</a></p>
+</blockquote><hr><h1 id="🙂-使用情境說明包含流程圖"><a class="anchor hidden-xs" href="#🙂-使用情境說明包含流程圖" title="🙂-使用情境說明包含流程圖" data-vivaldi-spatnav-clickable="1"><span class="octicon octicon-link"></span></a>🙂 使用情境說明(包含流程圖)</h1><h2 id="設計動機"><a class="anchor hidden-xs" href="#設計動機" title="設計動機" data-vivaldi-spatnav-clickable="1"><span class="octicon octicon-link"></span></a>設計動機</h2><p>文字瀏覽、編輯器一直是作業系統內最基本，同時也最重要的一項功能；從基本的 nano、到功能強大的 vim、emacs，形形色色的文字瀏覽、編輯器因應不同的需求產生，也都在不同的系統中扮演非常重要的角色。</p><p>因此，在這次的作業裡面我們選擇製作電子書閱讀程式，提供書籤、頁數記憶的功能，方便使用者閱讀文字檔案。</p><h2 id="使用情境"><a class="anchor hidden-xs" href="#使用情境" title="使用情境" data-vivaldi-spatnav-clickable="1"><span class="octicon octicon-link"></span></a>使用情境</h2><p>在 xv6 中輸入指令 <code>meow</code> 進入電子書閱讀器的選書畫面；接著可以輸入 <code>a</code> <code>b</code> <code>c</code> <code>d</code> <code>e</code> 選擇不同書籍，或是輸入 <code>q</code> 結束程式。</p><p>進入書籍後，使用鍵盤 enter 鍵翻頁、閱讀下一段文章、輸入 <code>b XX</code> 將當前的頁面儲存為書籤（XX 為書籤編號）、輸入 <code>j XX</code> 跳到指定編號的書籤，或是輸入<code>q</code> 回到選書畫面。</p><h2 id="程式流程圖"><a class="anchor hidden-xs" href="#程式流程圖" title="程式流程圖" data-vivaldi-spatnav-clickable="1"><span class="octicon octicon-link"></span></a>程式流程圖</h2><p><img src="https://i.imgur.com/LOQV6p9.png" alt=""></p><hr><h1 id="😇-Demo畫面"><a class="anchor hidden-xs" href="#😇-Demo畫面" title="😇-Demo畫面" data-vivaldi-spatnav-clickable="1"><span class="octicon octicon-link"></span></a>😇 Demo畫面</h1><iframe width="600" height="365" src="https://www.youtube.com/embed/SDb1NRmvCfc" allowfullscreen="" style="display:block; margin:auto;"></iframe><hr><h1 id="🏃-實作過程修改哪些檔案含圖片"><a class="anchor hidden-xs" href="#🏃-實作過程修改哪些檔案含圖片" title="🏃-實作過程修改哪些檔案含圖片" data-vivaldi-spatnav-clickable="1"><span class="octicon octicon-link"></span></a>🏃 實作過程(修改哪些檔案[含圖片])</h1><p>繼續沿用在 hw2 新增 system call 的 xv6 程式碼，並在先前新增的 meow.c 檔案中實作我們的電子書閱讀器，因為操作主要需要不斷更新 view 以及程式狀態，因此應用程式使用 MVC 架構，以 controller 判斷使用者輸入來呼叫 model 更新 view 為主要概念進行閱讀器的實作。</p><h3 id="filec"><a class="anchor hidden-xs" href="#filec" title="filec" data-vivaldi-spatnav-clickable="1"><span class="octicon octicon-link"></span></a>file.c</h3><p>hw2 已完成實作 <code>lseek()</code></p><h3 id="sysfilec"><a class="anchor hidden-xs" href="#sysfilec" title="sysfilec" data-vivaldi-spatnav-clickable="1"><span class="octicon octicon-link"></span></a>sysfile.c</h3><p>hw2 已完成實作 <code>readv()</code> 以及 <code>writev()</code></p><h3 id="xv6-資料夾中"><a class="anchor hidden-xs" href="#xv6-資料夾中" title="xv6-資料夾中" data-vivaldi-spatnav-clickable="1"><span class="octicon octicon-link"></span></a>xv6 資料夾中</h3><p>新增書本的 txt 檔案 ，讓閱讀器能有實際的電子書使用<br>
+<img src="https://i.imgur.com/r76hknM.png" alt=""></p><h3 id="Makefile"><a class="anchor hidden-xs" href="#Makefile" title="Makefile" data-vivaldi-spatnav-clickable="1"><span class="octicon octicon-link"></span></a>Makefile</h3><p>為了能在 xv6 系統中使用新增的 txt 文字檔案，修改 Makefile 中有關的變數</p><pre><code>fs.img: mkfs README test.txt HANSEL_AND_GRETEL.txt IRON_HANS.txt RAPUNZEL.txt THE_QUEEN_BEE.txt THE_SEVEN_RAVENS.txt $(UPROGS)
+	./mkfs fs.img README test.txt meow.txt HANSEL_AND_GRETEL.txt IRON_HANS.txt RAPUNZEL.txt THE_QUEEN_BEE.txt THE_SEVEN_RAVENS.txt $(UPROGS)
+</code></pre><pre><code># make a printout
+FILES = $(shell grep -v '^\#' runoff.list)
+PRINT = runoff.list runoff.spec README test.txt meow.txt HANSEL_AND_GRETEL.txt IRON_HANS.txt RAPUNZEL.txt THE_QUEEN_BEE.txt THE_SEVEN_RAVENS.txt toc.hdr toc.ftr $(FILES)
+</code></pre><pre><code>EXTRA=\
+	mkfs.c ulib.c user.h cat.c echo.c forktest.c grep.c kill.c\
+	ln.c ls.c mkdir.c rm.c stressfs.c usertests.c wc.c zombie.c\
+	printf.c umalloc.c meow.c\
+	README dot-bochsrc *.pl toc.* runoff runoff1 runoff.list\
+	.gdbinit.tmpl gdbutil\
+	test.txt meow.txt HANSEL_AND_GRETEL.txt IRON_HANS.txt RAPUNZEL.txt THE_QUEEN_BEE.txt THE_SEVEN_RAVENS.txt\
+</code></pre><h3 id="meowc"><a class="anchor hidden-xs" href="#meowc" title="meowc" data-vivaldi-spatnav-clickable="1"><span class="octicon octicon-link"></span></a>meow.c</h3><p>應用程式主體，使用MVC架構。</p><pre><code class="c hljs"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"user.h"</span></span>
+
+<span class="token comment">// structs:</span>
+<span class="token keyword">struct</span> iovec
+<span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token operator">*</span>iov_base<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> iov_len<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">// functions:</span>
+
+<span class="token comment">// 將文字檔對應的 config 檔（包含上次離開的地方、書籤等資料）讀入</span>
+<span class="token keyword">void</span> <span class="token function">read_config</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>filename<span class="token punctuation">,</span> <span class="token keyword">int</span> <span class="token operator">*</span>lastOffset<span class="token punctuation">,</span> <span class="token keyword">int</span> <span class="token operator">*</span>bookMarks<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> iovec iov<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    iov<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>iov_base <span class="token operator">=</span> lastOffset<span class="token punctuation">;</span>
+    iov<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>iov_len <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+
+    iov<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>iov_base <span class="token operator">=</span> bookMarks<span class="token punctuation">;</span>
+    iov<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>iov_len <span class="token operator">=</span> <span class="token number">400</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> fd <span class="token operator">=</span> <span class="token function">open</span><span class="token punctuation">(</span>filename<span class="token punctuation">,</span> O_RDONLY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">readv</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span> iov<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">close</span><span class="token punctuation">(</span>fd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 離開時寫入 config</span>
+<span class="token keyword">void</span> <span class="token function">write_config</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>filename<span class="token punctuation">,</span> <span class="token keyword">int</span> <span class="token operator">*</span>lastOffset<span class="token punctuation">,</span> <span class="token keyword">int</span> <span class="token operator">*</span>bookMarks<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> iovec iov<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    iov<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>iov_base <span class="token operator">=</span> lastOffset<span class="token punctuation">;</span>
+    iov<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>iov_len <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+
+    iov<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>iov_base <span class="token operator">=</span> bookMarks<span class="token punctuation">;</span>
+    iov<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>iov_len <span class="token operator">=</span> <span class="token number">400</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> fd <span class="token operator">=</span> <span class="token function">open</span><span class="token punctuation">(</span>filename<span class="token punctuation">,</span> O_WRONLY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">writev</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span> iov<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">close</span><span class="token punctuation">(</span>fd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// main program:</span>
+
+<span class="token comment">// window width &amp; window height</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> winWidth 60</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> winHeight 18</span>
+
+<span class="token comment">// book amount</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> BOOK_AMOUNT 5</span>
+
+<span class="token comment">// define all states</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> EXIT 0</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> SELECT_BOOK 1</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> START_READING 2</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> READING 3</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> READING_REACH_END 4</span>
+
+<span class="token comment">// const variables</span>
+<span class="token keyword">static</span> <span class="token keyword">char</span> booksFileName<span class="token punctuation">[</span>BOOK_AMOUNT<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">"HANSEL_AND_GRETEL.txt\0"</span><span class="token punctuation">,</span> <span class="token string">"IRON_HANS.txt\0"</span><span class="token punctuation">,</span> <span class="token string">"RAPUNZEL.txt\0"</span><span class="token punctuation">,</span>
+    <span class="token string">"THE_QUEEN_BEE.txt\0"</span><span class="token punctuation">,</span> <span class="token string">"THE_SEVEN_RAVENS.txt\0"</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">static</span> <span class="token keyword">char</span> booksConfigFileName<span class="token punctuation">[</span>BOOK_AMOUNT<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">"HANSEL_AND_GRETEL_config.txt\0"</span><span class="token punctuation">,</span> <span class="token string">"IRON_HANS_config.txt\0"</span><span class="token punctuation">,</span>
+    <span class="token string">"RAPUNZEL_config.txt\0"</span><span class="token punctuation">,</span> <span class="token string">"THE_QUEEN_BEE_config.txt\0"</span><span class="token punctuation">,</span>
+    <span class="token string">"THE_SEVEN_RAVENS_config.txt\0"</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">static</span> <span class="token keyword">char</span> booksName<span class="token punctuation">[</span>BOOK_AMOUNT<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"Hansel and Gretel\0"</span><span class="token punctuation">,</span> <span class="token string">"Iron Hans\0"</span><span class="token punctuation">,</span>
+                                          <span class="token string">"Rapunzel\0"</span><span class="token punctuation">,</span> <span class="token string">"The Queen Bee\0"</span><span class="token punctuation">,</span>
+                                          <span class="token string">"The Seven Ravens"</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">// variables for controller</span>
+<span class="token keyword">static</span> <span class="token keyword">int</span> state<span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">int</span> selectedBook<span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">int</span> booksFD<span class="token punctuation">[</span>BOOK_AMOUNT<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">int</span> booksConfigFD<span class="token punctuation">[</span>BOOK_AMOUNT<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">char</span> readBuffer<span class="token punctuation">[</span>winWidth <span class="token operator">*</span> winHeight<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">char</span> displayBuffer<span class="token punctuation">[</span>winWidth <span class="token operator">*</span> winHeight<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">int</span> pageStartOffset<span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">int</span> offset<span class="token punctuation">;</span>
+
+<span class="token comment">// 使用者換頁時，我們會計算該頁可以容納的字元數目，並將結果存進 buffer 裡面</span>
+<span class="token comment">// 以便後續的操作</span>
+<span class="token keyword">void</span> <span class="token function">processContent</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> counter <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> contentHeight <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> i<span class="token punctuation">;</span>
+
+    pageStartOffset <span class="token operator">=</span> offset<span class="token punctuation">;</span>
+
+    <span class="token comment">// 利用行高控制還需要讀入多少文字</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> winWidth <span class="token operator">*</span> <span class="token punctuation">(</span>winHeight <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span> <span class="token operator">&amp;&amp;</span> readBuffer<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token string">'@'</span> <span class="token operator">&amp;&amp;</span>
+                contentHeight <span class="token operator">&lt;</span> winHeight <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+         i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>counter <span class="token operator">==</span> winWidth <span class="token operator">||</span> readBuffer<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'\n'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            contentHeight<span class="token operator">++</span><span class="token punctuation">;</span>
+            counter <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>contentHeight <span class="token operator">==</span> winHeight <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        displayBuffer<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> readBuffer<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        counter<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    offset <span class="token operator">+</span><span class="token operator">=</span> i<span class="token punctuation">;</span>
+
+    <span class="token comment">// 為簡化操做，我們在檔案結尾加入 @ 字元，當讀到 @ 表示已經讀到檔案結尾</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>readBuffer<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'@'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        offset <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        state <span class="token operator">=</span> READING_REACH_END<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 補滿剩下的空行</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>contentHeight <span class="token operator">&lt;</span> winHeight<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        displayBuffer<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'\n'</span><span class="token punctuation">;</span>
+        contentHeight<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    displayBuffer<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'\0'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">moveStr</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>dest<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>source<span class="token punctuation">,</span> <span class="token keyword">int</span> size<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> i<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> size <span class="token operator">&amp;&amp;</span> source<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token string">'\0'</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        dest<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> source<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    dest<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'\0'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token comment">// 用來方便輸出換行的函示</span>
+<span class="token keyword">void</span> <span class="token function">printEmptyLine</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 用來渲染「選輸」的畫面</span>
+<span class="token keyword">void</span> <span class="token function">updateSelectBookView</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"Which book do you want to read?\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> BOOK_AMOUNT<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">" %c: %s\n"</span><span class="token punctuation">,</span> <span class="token string">'a'</span> <span class="token operator">+</span> i<span class="token punctuation">,</span> booksName<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> winHeight <span class="token operator">-</span> BOOK_AMOUNT <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 用來渲染「開始閱讀」的畫面</span>
+<span class="token keyword">void</span> <span class="token function">updateStartReadingView</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">printEmptyLine</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"Starting Reading \"%s\" from the place you \nleft last time..."</span><span class="token punctuation">,</span>
+           booksName<span class="token punctuation">[</span>selectedBook<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printEmptyLine</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 在使用者閱讀換頁時，渲染畫面</span>
+<span class="token keyword">int</span> <span class="token function">updateReadingView</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"%s"</span><span class="token punctuation">,</span> displayBuffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 更新畫面，會根據當前的狀態選擇不同的函數呼叫</span>
+<span class="token keyword">void</span> <span class="token function">updateView</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>state <span class="token operator">==</span> START_READING<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">updateStartReadingView</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>state <span class="token operator">==</span> SELECT_BOOK<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">updateSelectBookView</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>state <span class="token operator">==</span> READING <span class="token operator">||</span> state <span class="token operator">==</span> READING_REACH_END<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">updateReadingView</span><span class="token punctuation">(</span>displayBuffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 主程式</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> BOOK_AMOUNT<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        booksFD<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">open</span><span class="token punctuation">(</span>booksFileName<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> O_RDONLY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> BOOK_AMOUNT<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        booksConfigFD<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">open</span><span class="token punctuation">(</span>booksConfigFileName<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> O_RDWR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 程式開始執行時會先跳到選書的畫面</span>
+    state <span class="token operator">=</span> SELECT_BOOK<span class="token punctuation">;</span>
+    <span class="token function">updateView</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// varable use to save config</span>
+    <span class="token keyword">int</span> bookMarks<span class="token punctuation">[</span><span class="token number">100</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 不斷讀取使用者的輸入，直到狀態變成「退出」</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>state <span class="token operator">!=</span> EXIT<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 讀輸入的部分</span>
+        <span class="token keyword">char</span> c<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token function">read</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>c<span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 當前在選書時，輸入的內容為 a, b, c, d, e，代表要看不同的書</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>state <span class="token operator">==</span> SELECT_BOOK<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">switch</span> <span class="token punctuation">(</span>c<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+            <span class="token keyword">case</span> <span class="token string">'a'</span><span class="token punctuation">:</span>
+                selectedBook <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+                state <span class="token operator">=</span> START_READING<span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token keyword">case</span> <span class="token string">'b'</span><span class="token punctuation">:</span>
+                selectedBook <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                state <span class="token operator">=</span> START_READING<span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token keyword">case</span> <span class="token string">'c'</span><span class="token punctuation">:</span>
+                selectedBook <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+                state <span class="token operator">=</span> START_READING<span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token keyword">case</span> <span class="token string">'d'</span><span class="token punctuation">:</span>
+                selectedBook <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+                state <span class="token operator">=</span> START_READING<span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token keyword">case</span> <span class="token string">'e'</span><span class="token punctuation">:</span>
+                selectedBook <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+                state <span class="token operator">=</span> START_READING<span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token keyword">case</span> <span class="token string">'q'</span><span class="token punctuation">:</span>
+                state <span class="token operator">=</span> EXIT<span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token function">updateView</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// 開始閱讀時</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>state <span class="token operator">==</span> START_READING<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// 將對應書籍的 config 載入</span>
+            <span class="token function">read_config</span><span class="token punctuation">(</span>booksConfigFileName<span class="token punctuation">[</span>selectedBook<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>offset<span class="token punctuation">,</span> bookMarks<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// 移動到上次離開的地方</span>
+            <span class="token function">lseek</span><span class="token punctuation">(</span>booksFD<span class="token punctuation">[</span>selectedBook<span class="token punctuation">]</span><span class="token punctuation">,</span> offset<span class="token punctuation">,</span> <span class="token constant">SEEK_SET</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// 把文字內容讀入 buffer</span>
+            <span class="token function">read</span><span class="token punctuation">(</span>booksFD<span class="token punctuation">[</span>selectedBook<span class="token punctuation">]</span><span class="token punctuation">,</span> readBuffer<span class="token punctuation">,</span> winWidth <span class="token operator">*</span> winHeight<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// 將剛剛讀入 buffer 的文字處理（主要是要計算會顯示多少字）</span>
+            <span class="token function">processContent</span><span class="token punctuation">(</span>displayBuffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// 將 state 設為「閱讀」</span>
+            state <span class="token operator">=</span> READING<span class="token punctuation">;</span>
+            <span class="token function">updateView</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// 閱讀</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>state <span class="token operator">==</span> READING<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">switch</span> <span class="token punctuation">(</span>c<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+            <span class="token comment">// enter =&gt; 翻頁</span>
+            <span class="token keyword">case</span> <span class="token string">'\n'</span><span class="token punctuation">:</span>
+                <span class="token comment">// 先用 lseek 移動到上次結束顯示的地方</span>
+                <span class="token function">lseek</span><span class="token punctuation">(</span>booksFD<span class="token punctuation">[</span>selectedBook<span class="token punctuation">]</span><span class="token punctuation">,</span> offset<span class="token punctuation">,</span> <span class="token constant">SEEK_SET</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">// 把文字讀進 buffer</span>
+                <span class="token function">read</span><span class="token punctuation">(</span>booksFD<span class="token punctuation">[</span>selectedBook<span class="token punctuation">]</span><span class="token punctuation">,</span> readBuffer<span class="token punctuation">,</span> winWidth <span class="token operator">*</span> winHeight<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">// 處理文字</span>
+                <span class="token function">processContent</span><span class="token punctuation">(</span>displayBuffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">// 更新畫面</span>
+                <span class="token function">updateView</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">// 如果文章已經結束，就將 state 設為「選書」，下次使用者</span>
+                <span class="token comment">// 按 enter 時就會回到選輸的畫面</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>state <span class="token operator">==</span> READING_REACH_END<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    state <span class="token operator">=</span> SELECT_BOOK<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// 跳到書籤位置</span>
+            <span class="token keyword">case</span> <span class="token string">'j'</span><span class="token punctuation">:</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment">// 先讀入使用者要跳到哪個書籤</span>
+                <span class="token keyword">int</span> mark_number<span class="token punctuation">;</span>
+                mark_number <span class="token operator">=</span> <span class="token punctuation">(</span>c<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token string">'0'</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">10</span> <span class="token operator">+</span> <span class="token punctuation">(</span>c<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token string">'0'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">// 將檔案的 offset 設定為書籤紀錄的位置，並用 lseek 跳過去</span>
+                offset <span class="token operator">=</span> bookMarks<span class="token punctuation">[</span>mark_number<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                <span class="token function">lseek</span><span class="token punctuation">(</span>booksFD<span class="token punctuation">[</span>selectedBook<span class="token punctuation">]</span><span class="token punctuation">,</span> offset<span class="token punctuation">,</span> <span class="token constant">SEEK_SET</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">// 將文字讀入 buffer</span>
+                <span class="token function">read</span><span class="token punctuation">(</span>booksFD<span class="token punctuation">[</span>selectedBook<span class="token punctuation">]</span><span class="token punctuation">,</span> readBuffer<span class="token punctuation">,</span> winWidth <span class="token operator">*</span> winHeight<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">// 處理文字</span>
+                <span class="token function">processContent</span><span class="token punctuation">(</span>displayBuffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">// 更新畫面</span>
+                <span class="token function">updateView</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// 儲存書籤</span>
+            <span class="token keyword">case</span> <span class="token string">'b'</span><span class="token punctuation">:</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment">// 先讀使用者要存在第幾號書籤</span>
+                <span class="token keyword">int</span> mark_number<span class="token punctuation">;</span>
+                mark_number <span class="token operator">=</span> <span class="token punctuation">(</span>c<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token string">'0'</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">10</span> <span class="token operator">+</span> <span class="token punctuation">(</span>c<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token string">'0'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">// 把當前的 offset 作為書籤，記錄起來</span>
+                bookMarks<span class="token punctuation">[</span>mark_number<span class="token punctuation">]</span> <span class="token operator">=</span> pageStartOffset<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// 離開</span>
+            <span class="token keyword">case</span> <span class="token string">'q'</span><span class="token punctuation">:</span>
+                <span class="token comment">// 將 state 設為「選書」</span>
+                state <span class="token operator">=</span> SELECT_BOOK<span class="token punctuation">;</span>
+
+                <span class="token comment">// 把書籤、現在的書籤位置存入 config</span>
+                offset <span class="token operator">=</span> pageStartOffset<span class="token punctuation">;</span>
+                <span class="token function">write_config</span><span class="token punctuation">(</span>booksConfigFileName<span class="token punctuation">[</span>selectedBook<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>pageStartOffset<span class="token punctuation">,</span>
+                             bookMarks<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">updateView</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>state <span class="token operator">==</span> READING_REACH_END<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">updateView</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 離開</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"Good Bye!\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> BOOK_AMOUNT<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">close</span><span class="token punctuation">(</span>booksFD<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">close</span><span class="token punctuation">(</span>booksConfigFD<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">exit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre><p>此外，我們發現在 xv6 中，無法宣告超過 2000 byte 的陣列，似乎是因為它預設給一個 process 記憶體空間只有 1500 byte 左右；這在實作上變得有點麻煩。</p><hr><h1 id="😎-結論"><a class="anchor hidden-xs" href="#😎-結論" title="😎-結論" data-vivaldi-spatnav-clickable="1"><span class="octicon octicon-link"></span></a>😎 結論</h1><h2 id="新增的-system-call-使用"><a class="anchor hidden-xs" href="#新增的-system-call-使用" title="新增的-system-call-使用" data-vivaldi-spatnav-clickable="1"><span class="octicon octicon-link"></span></a>新增的 system call 使用</h2><h3 id="lseek"><a class="anchor hidden-xs" href="#lseek" title="lseek" data-vivaldi-spatnav-clickable="1"><span class="octicon octicon-link"></span></a>lseek()</h3><p>在讀入電子書時，會先將每本書個別的 config 先讀入，其中包含上次閱讀的進度，我們就可以利用 <code>lseek()</code> 這個新增的 system call 來移動電子書的檔案描述符（File descriptor）的 offset ，來達到回到上次閱讀處的目的。</p><p>不同書籤間的跳動也需要用到 <code>lseek()</code>，藉由將 offset 事先儲存下來，我們就可以利用 <code>lseek()</code> 將檔案描述符移動到對應的位置並讀取，完成移動至不同書籤位置的操作。</p><h3 id="writev-amp-readv"><a class="anchor hidden-xs" href="#writev-amp-readv" title="writev-amp-readv" data-vivaldi-spatnav-clickable="1"><span class="octicon octicon-link"></span></a>writev() &amp; readv()</h3><p>因為 config 檔案中的牽涉多個變數和資料型態，其中的記憶體位置並不連續，相較於使用舊有的 <code>read()</code> 和 <code>write()</code> 會需要多次的呼叫，造成系統負擔，使用 <code>readv()</code> 以及 <code>writev()</code> 不僅較為快速，在程式方面使用一個函式就可以讀寫整份設定檔案，非常方便使用。</p><p>也因為 system call 的 cost 非常大，而新增的 <code>readv()</code> 和 <code>writev()</code> 在讀寫時只需要一次的呼叫，可以降低 interupt 的次數。</p><h2 id="心得感想"><a class="anchor hidden-xs" href="#心得感想" title="心得感想" data-vivaldi-spatnav-clickable="1"><span class="octicon octicon-link"></span></a>心得感想</h2><p>在 hw2 和 hw3 的實作功課中，我們遇到很多挫折和意外，剛開始時，我們根本無法想像要在一個連 scanf 函式都沒有的環境 coding ，對於要如何增加和修改 kernel 的功能真的是一片茫然。</p><p>可是在一次又一次的上課學習，課後討論的過程中，我們不斷地發現本來難以理解的系統架構，用老師教的概念，也漸漸能理解了，而我們想實現功能的概念也愈來愈完整，有種倒吃甘蔗的感覺。</p><p>隨著對作業系統有更多的掌握，我們完成了作業二以及這次的作業三，我覺得從中學習到的不只是 xv6 作業系統的知識，對於 linux 系統的架構和閱讀數千行的完整程式的能力也大幅提升，就如同老師上課中的說的，要自己動手實作，才會瞭解上課學習的意義，經過這學期的課程，從零開始的作業系統學習，我才深刻體會到做中學的含意。</p><hr><h1 id="📅-組員分工"><a class="anchor hidden-xs" href="#📅-組員分工" title="📅-組員分工" data-vivaldi-spatnav-clickable="1"><span class="octicon octicon-link"></span></a>📅 組員分工</h1><p>于兆良：程式碼編寫與除錯 - 編寫 model ( function 編寫 )<br>
+楊泓彬：程式碼編寫與除錯 - 編寫 view 、 controller 、 DEMO 影片錄製<br>
+黃信恩：檔案統整、流程圖製作、報告撰寫</p><hr><div dir="ltr" class="resize-sensor" style="position: absolute; left: -10px; top: -10px; right: 0px; bottom: 0px; overflow: hidden; z-index: -1; visibility: hidden;"><div class="resize-sensor-expand" style="position: absolute; left: -10px; top: -10px; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;"><div style="position: absolute; left: 0px; top: 0px; transition: all 0s ease 0s; width: 100000px; height: 100000px;"></div></div><div class="resize-sensor-shrink" style="position: absolute; left: -10px; top: -10px; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;"><div style="position: absolute; left: 0; top: 0; transition: 0s; width: 200%; height: 200%"></div></div></div></div>
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-right dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+                <div class="toc"><ul class="nav">
+<li class=""><a href="#107-OS-homework-3-實作Kernel-Service" title="107 OS homework 3 實作Kernel Service" data-vivaldi-spatnav-clickable="1">107 OS homework 3 實作Kernel Service</a></li>
+<li class=""><a href="#🙂-使用情境說明包含流程圖" title="🙂 使用情境說明(包含流程圖)" data-vivaldi-spatnav-clickable="1">🙂 使用情境說明(包含流程圖)</a><ul class="nav">
+<li class=""><a href="#設計動機" title="設計動機" data-vivaldi-spatnav-clickable="1">設計動機</a></li>
+<li class=""><a href="#使用情境" title="使用情境" data-vivaldi-spatnav-clickable="1">使用情境</a></li>
+<li class=""><a href="#程式流程圖" title="程式流程圖" data-vivaldi-spatnav-clickable="1">程式流程圖</a></li>
+</ul>
+</li>
+<li class=""><a href="#😇-Demo畫面" title="😇 Demo畫面" data-vivaldi-spatnav-clickable="1">😇 Demo畫面</a></li>
+<li class=""><a href="#🏃-實作過程修改哪些檔案含圖片" title="🏃 實作過程(修改哪些檔案[含圖片])" data-vivaldi-spatnav-clickable="1">🏃 實作過程(修改哪些檔案[含圖片])</a><ul class="nav">
+<li class="invisable-node"><ul class="nav">
+<li class=""><a href="#filec" title="file.c" data-vivaldi-spatnav-clickable="1">file.c</a></li>
+<li><a href="#sysfilec" title="sysfile.c" data-vivaldi-spatnav-clickable="1">sysfile.c</a></li>
+<li class=""><a href="#xv6-資料夾中" title="xv6 資料夾中" data-vivaldi-spatnav-clickable="1">xv6 資料夾中</a></li>
+<li class=""><a href="#Makefile" title="Makefile" data-vivaldi-spatnav-clickable="1">Makefile</a></li>
+<li class=""><a href="#meowc" title="meow.c" data-vivaldi-spatnav-clickable="1">meow.c</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class=""><a href="#😎-結論" title="😎 結論" data-vivaldi-spatnav-clickable="1">😎 結論</a><ul class="nav">
+<li class=""><a href="#新增的-system-call-使用" title="新增的 system call 使用" data-vivaldi-spatnav-clickable="1">新增的 system call 使用</a><ul class="nav">
+<li class=""><a href="#lseek" title="lseek()" data-vivaldi-spatnav-clickable="1">lseek()</a></li>
+<li class=""><a href="#writev-amp-readv" title="writev() &amp; readv()" data-vivaldi-spatnav-clickable="1">writev() &amp; readv()</a></li>
+</ul>
+</li>
+<li><a href="#心得感想" title="心得感想" data-vivaldi-spatnav-clickable="1">心得感想</a></li>
+</ul>
+</li>
+<li class=""><a href="#📅-組員分工" title="📅 組員分工" data-vivaldi-spatnav-clickable="1">📅 組員分工</a></li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#" data-vivaldi-spatnav-clickable="1">Expand all</a><a class="back-to-top" href="#" data-vivaldi-spatnav-clickable="1">Back to top</a><a class="go-to-bottom" href="#" data-vivaldi-spatnav-clickable="1">Go to bottom</a></div>
+            </ul>
+        </div>
+    </div>
+    <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;"  >
+        <div class="toc"><ul class="nav">
+<li class=""><a href="#107-OS-homework-3-實作Kernel-Service" title="107 OS homework 3 實作Kernel Service" data-vivaldi-spatnav-clickable="1">107 OS homework 3 實作Kernel Service</a></li>
+<li class=""><a href="#🙂-使用情境說明包含流程圖" title="🙂 使用情境說明(包含流程圖)" data-vivaldi-spatnav-clickable="1">🙂 使用情境說明(包含流程圖)</a><ul class="nav">
+<li class=""><a href="#設計動機" title="設計動機" data-vivaldi-spatnav-clickable="1">設計動機</a></li>
+<li class=""><a href="#使用情境" title="使用情境" data-vivaldi-spatnav-clickable="1">使用情境</a></li>
+<li class=""><a href="#程式流程圖" title="程式流程圖" data-vivaldi-spatnav-clickable="1">程式流程圖</a></li>
+</ul>
+</li>
+<li class=""><a href="#😇-Demo畫面" title="😇 Demo畫面" data-vivaldi-spatnav-clickable="1">😇 Demo畫面</a></li>
+<li class=""><a href="#🏃-實作過程修改哪些檔案含圖片" title="🏃 實作過程(修改哪些檔案[含圖片])" data-vivaldi-spatnav-clickable="1">🏃 實作過程(修改哪些檔案[含圖片])</a><ul class="nav">
+<li class="invisable-node"><ul class="nav">
+<li class=""><a href="#filec" title="file.c" data-vivaldi-spatnav-clickable="1">file.c</a></li>
+<li><a href="#sysfilec" title="sysfile.c" data-vivaldi-spatnav-clickable="1">sysfile.c</a></li>
+<li class=""><a href="#xv6-資料夾中" title="xv6 資料夾中" data-vivaldi-spatnav-clickable="1">xv6 資料夾中</a></li>
+<li class=""><a href="#Makefile" title="Makefile" data-vivaldi-spatnav-clickable="1">Makefile</a></li>
+<li class=""><a href="#meowc" title="meow.c" data-vivaldi-spatnav-clickable="1">meow.c</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class=""><a href="#😎-結論" title="😎 結論" data-vivaldi-spatnav-clickable="1">😎 結論</a><ul class="nav">
+<li class=""><a href="#新增的-system-call-使用" title="新增的 system call 使用" data-vivaldi-spatnav-clickable="1">新增的 system call 使用</a><ul class="nav">
+<li class=""><a href="#lseek" title="lseek()" data-vivaldi-spatnav-clickable="1">lseek()</a></li>
+<li class=""><a href="#writev-amp-readv" title="writev() &amp; readv()" data-vivaldi-spatnav-clickable="1">writev() &amp; readv()</a></li>
+</ul>
+</li>
+<li><a href="#心得感想" title="心得感想" data-vivaldi-spatnav-clickable="1">心得感想</a></li>
+</ul>
+</li>
+<li class=""><a href="#📅-組員分工" title="📅 組員分工" data-vivaldi-spatnav-clickable="1">📅 組員分工</a></li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#" data-vivaldi-spatnav-clickable="1">Expand all</a><a class="back-to-top" href="#" data-vivaldi-spatnav-clickable="1">Back to top</a><a class="go-to-bottom" href="#" data-vivaldi-spatnav-clickable="1">Go to bottom</a></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.6.0/gist-embed.min.js" integrity="sha256-KyF2D6xPIJUW5sUDSs93vWyZm+1RzIpKCexxElmxl8g=" crossorigin="anonymous" defer></script>
+    <script>
+        var markdown = $(".markdown-body");
+        //smooth all hash trigger scrolling
+        function smoothHashScroll() {
+            var hashElements = $("a[href^='#']").toArray();
+            for (var i = 0; i < hashElements.length; i++) {
+                var element = hashElements[i];
+                var $element = $(element);
+                var hash = element.hash;
+                if (hash) {
+                    $element.on('click', function (e) {
+                        // store hash
+                        var hash = this.hash;
+                        if ($(hash).length <= 0) return;
+                        // prevent default anchor click behavior
+                        e.preventDefault();
+                        // animate
+                        $('body, html').stop(true, true).animate({
+                            scrollTop: $(hash).offset().top
+                        }, 100, "linear", function () {
+                            // when done, add hash to url
+                            // (default click behaviour)
+                            window.location.hash = hash;
+                        });
+                    });
+                }
+            }
+        }
+
+        smoothHashScroll();
+        var toc = $('.ui-toc');
+        var tocAffix = $('.ui-affix-toc');
+        var tocDropdown = $('.ui-toc-dropdown');
+        //toc
+        tocDropdown.click(function (e) {
+            e.stopPropagation();
+        });
+
+        var enoughForAffixToc = true;
+
+        function generateScrollspy() {
+            $(document.body).scrollspy({
+                target: ''
+            });
+            $(document.body).scrollspy('refresh');
+            if (enoughForAffixToc) {
+                toc.hide();
+                tocAffix.show();
+            } else {
+                tocAffix.hide();
+                toc.show();
+            }
+            $(document.body).scroll();
+        }
+
+        function windowResize() {
+            //toc right
+            var paddingRight = parseFloat(markdown.css('padding-right'));
+            var right = ($(window).width() - (markdown.offset().left + markdown.outerWidth() - paddingRight));
+            toc.css('right', right + 'px');
+            //affix toc left
+            var newbool;
+            var rightMargin = (markdown.parent().outerWidth() - markdown.outerWidth()) / 2;
+            //for ipad or wider device
+            if (rightMargin >= 133) {
+                newbool = true;
+                var affixLeftMargin = (tocAffix.outerWidth() - tocAffix.width()) / 2;
+                var left = markdown.offset().left + markdown.outerWidth() - affixLeftMargin;
+                tocAffix.css('left', left + 'px');
+            } else {
+                newbool = false;
+            }
+            if (newbool != enoughForAffixToc) {
+                enoughForAffixToc = newbool;
+                generateScrollspy();
+            }
+        }
+        $(window).resize(function () {
+            windowResize();
+        });
+        $(document).ready(function () {
+            windowResize();
+            generateScrollspy();
+        });
+
+        //remove hash
+        function removeHash() {
+            window.location.hash = '';
+        }
+
+        var backtotop = $('.back-to-top');
+        var gotobottom = $('.go-to-bottom');
+
+        backtotop.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToTop)
+                scrollToTop();
+            removeHash();
+        });
+        gotobottom.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToBottom)
+                scrollToBottom();
+            removeHash();
+        });
+
+        var toggle = $('.expand-toggle');
+        var tocExpand = false;
+
+        checkExpandToggle();
+        toggle.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            tocExpand = !tocExpand;
+            checkExpandToggle();
+        })
+
+        function checkExpandToggle () {
+            var toc = $('.ui-toc-dropdown .toc');
+            var toggle = $('.expand-toggle');
+            if (!tocExpand) {
+                toc.removeClass('expand');
+                toggle.text('Expand all');
+            } else {
+                toc.addClass('expand');
+                toggle.text('Collapse all');
+            }
+        }
+
+        function scrollToTop() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: 0
+            }, 100, "linear");
+        }
+
+        function scrollToBottom() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: $(document.body)[0].scrollHeight
+            }, 100, "linear");
+        }
+    </script>
+</body>
+
+</html>
