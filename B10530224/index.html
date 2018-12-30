@@ -1,1 +1,1031 @@
-homework not found!!
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>
+        107 OS homework 3 實作 - HackMD
+    </title>
+    <link rel="icon" type="image/png" href="https://hackmd.io/favicon.png">
+    <link rel="apple-touch-icon" href="https://hackmd.io/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" integrity="sha256-3iu9jgsy9TpTwXKb7bNQzqWekRX7pPK+2OLj3R922fo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css" integrity="sha256-QiWfLIsCT02Sdwkogf6YMiQlj4NE84MKkzEMkZnMGdg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css" integrity="sha256-vtR0hSWRc3Tb26iuN2oZHt3KRUomwTufNIf5/4oeCyg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/css/basic/emojify.min.css" integrity="sha256-UOrvMOsSDSrW6szVLe8ZDZezBxh5IoIfgTwdNDgTjiU=" crossorigin="anonymous" />
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i|Source+Code+Pro:300,400,500|Source+Sans+Pro:300,300i,400,400i,600,600i|Source+Serif+Pro&subset=latin-ext);.hljs{display:block;background:#fff;padding:.5em;color:#333;overflow-x:auto}.hljs-comment,.hljs-meta{color:#969896}.hljs-emphasis,.hljs-quote,.hljs-string,.hljs-strong,.hljs-template-variable,.hljs-variable{color:#df5000}.hljs-keyword,.hljs-selector-tag,.hljs-type{color:#a71d5d}.hljs-attribute,.hljs-bullet,.hljs-literal,.hljs-number,.hljs-symbol{color:#0086b3}.hljs-built_in,.hljs-builtin-name{color:#005cc5}.hljs-name,.hljs-section{color:#63a35c}.hljs-tag{color:#333}.hljs-attr,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-selector-pseudo,.hljs-title{color:#795da3}.hljs-addition{color:#55a532;background-color:#eaffea}.hljs-deletion{color:#bd2c00;background-color:#ffecec}.hljs-link{text-decoration:underline}.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.5;word-wrap:break-word}.markdown-body:after,.markdown-body:before{display:table;content:""}.markdown-body:after{clear:both}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body .absent{color:#c00}.markdown-body .anchor{float:left;padding-right:4px;margin-left:-20px;line-height:1}.markdown-body .anchor:focus{outline:none}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}.markdown-body hr{height:.25em;padding:0;margin:24px 0;background-color:#e7e7e7;border:0}.markdown-body blockquote{font-size:16px;padding:0 1em;color:#777;border-left:.25em solid #ddd}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body .loweralpha{list-style-type:lower-alpha}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}.markdown-body h1 .octicon-link,.markdown-body h2 .octicon-link,.markdown-body h3 .octicon-link,.markdown-body h4 .octicon-link,.markdown-body h5 .octicon-link,.markdown-body h6 .octicon-link{color:#000;vertical-align:middle;visibility:hidden}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{text-decoration:none}.markdown-body h1:hover .anchor .octicon-link,.markdown-body h2:hover .anchor .octicon-link,.markdown-body h3:hover .anchor .octicon-link,.markdown-body h4:hover .anchor .octicon-link,.markdown-body h5:hover .anchor .octicon-link,.markdown-body h6:hover .anchor .octicon-link{visibility:visible}.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt{font-size:inherit}.markdown-body h1{font-size:2em}.markdown-body h1,.markdown-body h2{padding-bottom:.3em;border-bottom:1px solid #eee}.markdown-body h2{font-size:1.5em}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{font-size:.85em;color:#777}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol.no-list,.markdown-body ul.no-list{padding:0;list-style-type:none}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body li>p{margin-top:16px}.markdown-body li+li{margin-top:.25em}.markdown-body dl{padding:0}.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}.markdown-body dl dd{padding:0 16px;margin-bottom:16px}.markdown-body table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}.markdown-body table th{font-weight:700}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #ddd}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.markdown-body img{max-width:100%;box-sizing:content-box;background-color:#fff}.markdown-body img[align=right]{padding-left:20px}.markdown-body img[align=left]{padding-right:20px}.markdown-body .emoji{max-width:none;vertical-align:text-top;background-color:transparent}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{display:block;float:left;width:auto;padding:7px;margin:13px 0 0;overflow:hidden;border:1px solid #ddd}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{display:block;padding:5px 0 0;clear:both;color:#333}.markdown-body span.align-center{display:block;overflow:hidden;clear:both}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{display:block;overflow:hidden;clear:both}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}.markdown-body code:after,.markdown-body code:before,.markdown-body tt:after,.markdown-body tt:before{letter-spacing:-.2em;content:"\00a0"}.markdown-body code br,.markdown-body tt br{display:none}.markdown-body del code{text-decoration:inherit}.markdown-body pre{word-wrap:normal}.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.markdown-body pre code,.markdown-body pre tt{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body pre code:after,.markdown-body pre code:before,.markdown-body pre tt:after,.markdown-body pre tt:before{content:normal}.markdown-body .csv-data td,.markdown-body .csv-data th{padding:5px;overflow:hidden;font-size:12px;line-height:1;text-align:left;white-space:nowrap}.markdown-body .csv-data .blob-line-num{padding:10px 8px 9px;text-align:right;background:#fff;border:0}.markdown-body .csv-data tr{border-top:0}.markdown-body .csv-data th{font-weight:700;background:#f8f8f8;border-top:0}.markdown-body kbd{display:inline-block;padding:3px 5px;font-size:11px;line-height:10px;color:#555;vertical-align:middle;background-color:#fcfcfc;border:1px solid #ccc;border-bottom-color:#bbb;border-radius:3px;box-shadow:inset 0 -1px 0 #bbb}.news .alert .markdown-body blockquote{padding:0 0 0 40px;border:0 none}.activity-tab .news .alert .commits,.activity-tab .news .markdown-body blockquote{padding-left:0}.task-list-item{list-style-type:none}.task-list-item label{font-weight:400}.task-list-item.enabled label{cursor:pointer}.task-list-item+.task-list-item{margin-top:3px}.task-list-item-checkbox{float:left;margin:.31em 0 .2em -1.3em!important;vertical-align:middle;cursor:default!important}.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;padding-top:40px;padding-bottom:40px;max-width:758px;overflow:visible!important}.markdown-body .emoji{vertical-align:top}.markdown-body pre{border:inherit!important}.markdown-body code{color:inherit!important}.markdown-body pre code .wrapper{display:-moz-inline-flex;display:-ms-inline-flex;display:-o-inline-flex;display:inline-flex}.markdown-body pre code .gutter{float:left;overflow:hidden;-webkit-user-select:none;user-select:none}.markdown-body pre code .gutter.linenumber{text-align:right;position:relative;display:inline-block;cursor:default;z-index:4;padding:0 8px 0 0;min-width:20px;box-sizing:content-box;color:#afafaf!important;border-right:3px solid #6ce26c!important}.markdown-body pre code .gutter.linenumber>span:before{content:attr(data-linenumber)}.markdown-body pre code .code{float:left;margin:0 0 0 16px}.markdown-body .gist .line-numbers{border-left:none;border-top:none;border-bottom:none}.markdown-body .gist .line-data{border:none}.markdown-body .gist table{border-spacing:0;border-collapse:inherit!important}.markdown-body code[data-gist-id]{background:none;padding:0}.markdown-body code[data-gist-id]:after,.markdown-body code[data-gist-id]:before{content:""}.markdown-body code[data-gist-id] .blob-num{border:unset}.markdown-body code[data-gist-id] table{overflow:unset;margin-bottom:unset}.markdown-body code[data-gist-id] table tr{background:unset}.markdown-body[dir=rtl] pre{direction:ltr}.markdown-body[dir=rtl] code{direction:ltr;unicode-bidi:embed}.markdown-body .alert>p{margin-bottom:0}.markdown-body pre.abc,.markdown-body pre.flow-chart,.markdown-body pre.graphviz,.markdown-body pre.mermaid,.markdown-body pre.sequence-diagram{text-align:center;background-color:inherit;border-radius:0;white-space:inherit}.markdown-body pre.abc>code,.markdown-body pre.flow-chart>code,.markdown-body pre.graphviz>code,.markdown-body pre.mermaid>code,.markdown-body pre.sequence-diagram>code{text-align:left}.markdown-body pre.abc>svg,.markdown-body pre.flow-chart>svg,.markdown-body pre.graphviz>svg,.markdown-body pre.mermaid>svg,.markdown-body pre.sequence-diagram>svg{max-width:100%;height:100%}.markdown-body pre>code.wrap{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}.markdown-body .alert>p,.markdown-body .alert>ul{margin-bottom:0}.markdown-body summary{display:list-item}.markdown-body summary:focus{outline:none}.markdown-body details summary{cursor:pointer}.markdown-body details:not([open])>:not(summary){display:none}.markdown-body figure{margin:1em 40px}.markdown-body .mark,.markdown-body mark{background-color:#fff1a7}.vimeo,.youtube{cursor:pointer;display:table;text-align:center;background-position:50%;background-repeat:no-repeat;background-size:contain;background-color:#000;overflow:hidden}.vimeo,.youtube{position:relative;width:100%}.youtube{padding-bottom:56.25%}.vimeo img{width:100%;object-fit:contain;z-index:0}.youtube img{object-fit:cover;z-index:0}.vimeo iframe,.youtube iframe,.youtube img{width:100%;height:100%;position:absolute;top:0;left:0}.vimeo iframe,.youtube iframe{vertical-align:middle;z-index:1}.vimeo .icon,.youtube .icon{position:absolute;height:auto;width:auto;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;opacity:.3;transition:opacity .2s;z-index:0}.vimeo:hover .icon,.youtube:hover .icon{opacity:.6;transition:opacity .2s}.slideshare .inner,.speakerdeck .inner{position:relative;width:100%}.slideshare .inner iframe,.speakerdeck .inner iframe{position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%}.MJX_Assistive_MathML{display:none}.ui-infobar{position:relative;z-index:2;max-width:760px;margin:25px auto -25px;padding:0 15px;color:#777}.toc .invisable-node{list-style-type:none}.ui-toc{position:fixed;bottom:20px;z-index:998}.ui-toc-label{opacity:.3;background-color:#ccc;border:none;transition:opacity .2s}.ui-toc .open .ui-toc-label{opacity:1;color:#fff;transition:opacity .2s}.ui-toc-label:focus{opacity:.3;background-color:#ccc;color:#000}.ui-toc-label:hover{opacity:1;background-color:#ccc;transition:opacity .2s}.ui-toc-dropdown{margin-top:23px;margin-bottom:20px;padding-left:10px;padding-right:10px;max-width:45vw;width:25vw;max-height:70vh;overflow:auto;text-align:inherit}.ui-toc-dropdown>.toc{max-height:calc(70vh - 100px);overflow:auto}.ui-toc-dropdown[dir=rtl] .nav{padding-right:0;letter-spacing:.0029em}.ui-toc-dropdown a{overflow:hidden;text-overflow:ellipsis;white-space:pre}.ui-toc-dropdown .nav>li>a{display:block;padding:4px 20px;font-size:13px;font-weight:500;color:#767676}.ui-toc-dropdown .nav>li:first-child:last-child > ul,.ui-toc-dropdown .toc.expand ul{display:block}.ui-toc-dropdown .nav>li>a:focus,.ui-toc-dropdown .nav>li>a:hover{padding-left:19px;color:#000;text-decoration:none;background-color:transparent;border-left:1px solid #000}.ui-toc-dropdown[dir=rtl] .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav>li>a:hover{padding-right:19px;border-left:none;border-right:1px solid #000}.ui-toc-dropdown .nav>.active:focus>a,.ui-toc-dropdown .nav>.active:hover>a,.ui-toc-dropdown .nav>.active>a{padding-left:18px;font-weight:700;color:#000;background-color:transparent;border-left:2px solid #000}.ui-toc-dropdown[dir=rtl] .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav>.active>a{padding-right:18px;border-left:none;border-right:2px solid #000}.ui-toc-dropdown .nav .nav{display:none;padding-bottom:10px}.ui-toc-dropdown .nav>.active>ul{display:block}.ui-toc-dropdown .nav .nav>li>a{padding-top:1px;padding-bottom:1px;padding-left:30px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a{padding-right:30px}.ui-toc-dropdown .nav .nav>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:40px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a{padding-right:40px}.ui-toc-dropdown .nav .nav>li>a:focus,.ui-toc-dropdown .nav .nav>li>a:hover{padding-left:29px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:hover{padding-right:29px}.ui-toc-dropdown .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>a:hover{padding-left:39px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:hover{padding-right:39px}.ui-toc-dropdown .nav .nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>a{padding-left:28px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>a{padding-right:28px}.ui-toc-dropdown .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>a{padding-left:38px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>a{padding-right:38px}.markdown-body[lang^=ja]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ\ ゴシック,sans-serif}.ui-toc-dropdown[lang^=ja]{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,ＭＳ\ Ｐゴシック,sans-serif}.markdown-body[lang=zh-tw]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}.ui-toc-dropdown[lang=zh-tw]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,微軟正黑UI,sans-serif}.markdown-body[lang=zh-cn]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}.ui-toc-dropdown[lang=zh-cn]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,微软雅黑UI,sans-serif}.ui-affix-toc{position:fixed;top:0;max-width:15vw;max-height:70vh;overflow:auto}.back-to-top,.expand-toggle,.go-to-bottom{display:block;padding:4px 10px;margin-top:10px;margin-left:10px;font-size:12px;font-weight:500;color:#999}.back-to-top:focus,.back-to-top:hover,.expand-toggle:focus,.expand-toggle:hover,.go-to-bottom:focus,.go-to-bottom:hover{color:#563d7c;text-decoration:none}.back-to-top,.go-to-bottom{margin-top:0}.ui-user-icon{width:20px;height:20px;display:block;border-radius:3px;margin-top:2px;margin-bottom:2px;margin-right:5px;background-position:50%;background-repeat:no-repeat;background-size:contain}.ui-user-icon.small{width:18px;height:18px;display:inline-block;vertical-align:middle;margin:0 0 .2em}.ui-infobar>small>span{line-height:22px}.ui-infobar>small .dropdown{display:inline-block}.ui-infobar>small .dropdown a:focus,.ui-infobar>small .dropdown a:hover{text-decoration:none}.unselectable{-webkit-user-select:none;-o-user-select:none;user-select:none}@media print{blockquote,div,img,pre,table{page-break-inside:avoid!important}a[href]:after{font-size:12px!important}}.markdown-body.slides{position:relative;z-index:1;color:#222}.markdown-body.slides:before{content:"";display:block;position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;background-color:currentColor;box-shadow:0 0 0 50vw}.markdown-body.slides section[data-markdown]{position:relative;margin-bottom:1.5em;background-color:#fff;text-align:center}.markdown-body.slides section[data-markdown] code{text-align:left}.markdown-body.slides section[data-markdown]:before{content:"";display:block;padding-bottom:56.23%}.markdown-body.slides section[data-markdown]>div:first-child{position:absolute;top:50%;left:1em;right:1em;transform:translateY(-50%);max-height:100%;overflow:hidden}.markdown-body.slides section[data-markdown]>ul{display:inline-block}.markdown-body.slides>section>section+section:after{content:"";position:absolute;top:-1.5em;right:1em;height:1.5em;border:3px solid #777}body{font-smoothing:subpixel-antialiased!important;-webkit-font-smoothing:subpixel-antialiased!important;-moz-osx-font-smoothing:auto!important;text-shadow:0 0 1em transparent,1px 1px 1.2px rgba(0,0,0,.004);-webkit-overflow-scrolling:touch;font-family:Source Sans Pro,Helvetica,Arial,sans-serif;letter-spacing:.025em}.focus,:focus{outline:none!important}::-moz-focus-inner{border:0!important}body.modal-open{overflow-y:auto;padding-right:0!important}
+    </style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js" integrity="sha256-8E4Is26QH0bD52WoQpcB+R/tcWQtpzlCojrybUd7Mxo=" crossorigin="anonymous"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="doc" class="markdown-body container-fluid comment-enabled"><h1 id="107-OS-homework-3-實作"><a class="anchor hidden-xs" href="#107-OS-homework-3-實作" title="107-OS-homework-3-實作"><span class="octicon octicon-link"></span></a>107 OS homework 3 實作</h1><blockquote>
+<p>組長：B10530027 黃志仁<br>
+組員：B10530004 盧克函<br>
+組員：B10530224 吳奇倫<br>
+github: <a href="https://github.com/splitline/xv6-public" target="_blank" rel="noopener">https://github.com/splitline/xv6-public</a></p>
+</blockquote><hr><h1 id="-使用情境說明包含流程圖"><a class="anchor hidden-xs" href="#-使用情境說明包含流程圖" title="-使用情境說明包含流程圖"><span class="octicon octicon-link"></span></a><img alt=":joy:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/joy.png" title=":joy:"> 使用情境說明(包含流程圖)</h1><p>發想：<br>
+我們希望將繁瑣的登入步驟（輸入帳號密碼）等工作簡化成感應悠遊卡，如同圖書館的借書系統只需要悠遊卡即可快速借書。但為了保護學生證被拷貝或遺失的狀態，我們也提供了額外的保護。</p><p>基於我們作業二所建立的檔案權限系統我們將登入分為兩個層次：</p><ol>
+<li>開機時以學生證登入系統：只能使用 other 權限允許的內容，如： <code>------rwx</code></li>
+<li>若要讀取私人權限的檔案或程式，則需要使用 <code>gogopw</code>(類似 sudo 的感覺) 另外輸入密碼。</li>
+</ol><p><img src="https://i.imgur.com/pz0FVi9.png" alt=""></p><p><img src="https://i.imgur.com/6rqvFWI.png" alt=""></p><p><em>商借到的 RFID 讀卡機</em><br>
+<img src="https://i.imgur.com/TA7LVDy.jpg" alt="" width="300"></p><hr><h1 id="-Demo畫面"><a class="anchor hidden-xs" href="#-Demo畫面" title="-Demo畫面"><span class="octicon octicon-link"></span></a><img alt=":joy:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/joy.png" title=":joy:"> Demo畫面</h1><h3 id="開機後顯示請刷學生證"><a class="anchor hidden-xs" href="#開機後顯示請刷學生證" title="開機後顯示請刷學生證"><span class="octicon octicon-link"></span></a>開機後顯示請刷學生證</h3><p><img src="https://i.imgur.com/BdrCcNk.jpg" alt=""></p><p><img src="https://i.imgur.com/e9isocp.gif" alt=""></p><h3 id="雙重權限"><a class="anchor hidden-xs" href="#雙重權限" title="雙重權限"><span class="octicon octicon-link"></span></a>雙重權限</h3><p><img src="https://i.imgur.com/R5eaRo7.png" alt=""></p><ul>
+<li>根目錄有一個權限為 <code>770</code> 的 <code>test</code> 檔。</li>
+<li>一開始使用 <code>cat</code> 跟 <code>&gt;&gt;</code> 去讀檔寫檔，由於 other 權限為 0，所以都會造成 Permission denied。</li>
+<li>使用 <code>gogopw</code> 輸入密碼後，即可獲得完整權限，自由讀檔寫檔。</li>
+</ul><h3 id="rwx-權限系統"><a class="anchor hidden-xs" href="#rwx-權限系統" title="rwx-權限系統"><span class="octicon octicon-link"></span></a><code>rwx</code> 權限系統</h3><h4 id="USER-SPLITLINE-登入"><a class="anchor hidden-xs" href="#USER-SPLITLINE-登入" title="USER-SPLITLINE-登入"><span class="octicon octicon-link"></span></a>USER <code>SPLITLINE</code> 登入</h4><blockquote>
+<p>登入系統，寫入一個檔案meow，讀取檔案meow，修改權限為 770（Other 沒任何權限）</p>
+</blockquote><p><img src="https://i.imgur.com/sfyg1HE.png" alt=""></p><h4 id="USER-HANK-登入"><a class="anchor hidden-xs" href="#USER-HANK-登入" title="USER-HANK-登入"><span class="octicon octicon-link"></span></a>USER <code>HANK</code> 登入</h4><blockquote>
+<p>ls （可以看到 meow 權限已被修改為 770）<br>
+欲讀取、寫入meow檔案卻被阻止了 <img alt=":cry:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/cry.png" title=":cry:"></p>
+</blockquote><p><img src="https://i.imgur.com/pzgC5LU.png" alt=""></p><hr><h1 id="-實作過程修改哪些檔案含圖片"><a class="anchor hidden-xs" href="#-實作過程修改哪些檔案含圖片" title="-實作過程修改哪些檔案含圖片"><span class="octicon octicon-link"></span></a><img alt=":joy:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/joy.png" title=":joy:"> 實作過程(修改哪些檔案[含圖片])</h1><p>基於 HW2 的基本建設下，我們又新加入了：</p><ol>
+<li>實作使用學生證登入</li>
+<li>「新增使用者」的功能</li>
+<li>實作雙層權限（刷卡登入、登入後輸入密碼）</li>
+<li>讀、寫、執行的檔案權限</li>
+<li>I/O</li>
+</ol><h2 id="檔案修改"><a class="anchor hidden-xs" href="#檔案修改" title="檔案修改"><span class="octicon octicon-link"></span></a>檔案修改</h2><ul>
+<li>26 files changed.</li>
+<li>366 additions.</li>
+<li>89 deletions.</li>
+<li>diff總覽：<a href="https://goo.gl/LBiHfp" target="_blank" rel="noopener">https://goo.gl/LBiHfp</a></li>
+</ul><h3 id="完整版"><a class="anchor hidden-xs" href="#完整版" title="完整版"><span class="octicon octicon-link"></span></a>完整版</h3><h4 id="Makefile"><a class="anchor hidden-xs" href="#Makefile" title="Makefile"><span class="octicon octicon-link"></span></a>Makefile</h4><blockquote>
+<p>新增兩個 user program</p>
+</blockquote><pre><code class="diff hljs">@@ -185,6 +185,8 @@ UPROGS=\
+    _wc\
+    _zombie\
+    _login\
+<span class="hljs-addition">+	_adduser\</span>
+<span class="hljs-addition">+	_gogopw\</span>
+    _ps\
+    _pwd\
+     _chmod\
+</code></pre><h4 id="adduserc"><a class="anchor hidden-xs" href="#adduserc" title="adduserc"><span class="octicon octicon-link"></span></a>adduser.c</h4><blockquote>
+<p>用來新增使用者的 user program</p>
+</blockquote><pre><code class="diff hljs"><span class="hljs-meta">@@ -0,0 +1,48 @@</span>
+<span class="hljs-addition">+#include "types.h"</span>
+<span class="hljs-addition">+#include "user.h"</span>
+<span class="hljs-addition">+#include "stat.h"</span>
+<span class="hljs-addition">+#include "fcntl.h"</span>
+<span class="hljs-addition">+#include "login_util.h"</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+#define BUFSIZE 128</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+int main()</span>
+<span class="hljs-addition">+{</span>
+<span class="hljs-addition">+    </span>
+<span class="hljs-addition">+    char cardID[BUFSIZE], username[BUFSIZE], password[BUFSIZE];</span>
+<span class="hljs-addition">+    printf(1, "[SCANNING ID CARD...]");</span>
+<span class="hljs-addition">+    gets_hidden(cardID, BUFSIZE);</span>
+<span class="hljs-addition">+    trim(cardID);</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+    printf(1, "Username:");</span>
+<span class="hljs-addition">+    gets(username, BUFSIZE);</span>
+<span class="hljs-addition">+    trim(username);</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+    printf(1, "Password:");</span>
+<span class="hljs-addition">+    gets(password, BUFSIZE);</span>
+<span class="hljs-addition">+    trim(password);</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+    int fd;</span>
+<span class="hljs-addition">+    if ((fd = open("/passwd", O_RDWR)) &lt; 0) {</span>
+<span class="hljs-addition">+        printf(1, "[x] open passwd file failed\n");</span>
+<span class="hljs-addition">+        exit();</span>
+<span class="hljs-addition">+    }</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+    int n, id = 0;</span>
+<span class="hljs-addition">+    char buf_L[512];</span>
+<span class="hljs-addition">+    while ((n = read(fd, buf_L, sizeof(buf_L))) &gt; 0) {</span>
+<span class="hljs-addition">+        for (int i = 0; i &lt; n; ++i) {</span>
+<span class="hljs-addition">+            if (buf_L[i] == ';') {</span>
+<span class="hljs-addition">+                id = atoi(buf_L + i + 1);</span>
+<span class="hljs-addition">+                int tmp = id;</span>
+<span class="hljs-addition">+                while((tmp/=10) &gt; 0 &amp;&amp; ++i);</span>
+<span class="hljs-addition">+            }</span>
+<span class="hljs-addition">+        }</span>
+<span class="hljs-addition">+    }</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+    char* hash_pass = hashPasswd(password);</span>
+<span class="hljs-addition">+    printf(fd, "%s;%s;%s;%d;%d\n", cardID, username, hash_pass, id + 1, id + 1);</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+    close(fd);</span>
+<span class="hljs-addition">+    exit();</span>
+<span class="hljs-addition">+}</span>
+</code></pre><h4 id="consolec"><a class="anchor hidden-xs" href="#consolec" title="consolec"><span class="octicon octicon-link"></span></a>console.c</h4><pre><code class="diff hljs">@@ -217,7 +217,8 @@ consoleintr(int (*getc)(void))
+       if(c != 0 &amp;&amp; input.e-input.r &lt; INPUT_BUF){
+         c = (c == '\r') ? '\n' : c;
+         input.buf[input.e++ % INPUT_BUF] = c;
+<span class="hljs-deletion">-        consputc(c);</span>
+<span class="hljs-addition">+        if(!input_hidden || c == '\n' || c == '\r')</span>
+<span class="hljs-addition">+          consputc(c);</span>
+         if(c == '\n' || c == C('D') || input.e == input.r+INPUT_BUF){
+           input.w = input.e;
+           wakeup(&amp;input.r);
+</code></pre><h4 id="defsh"><a class="anchor hidden-xs" href="#defsh" title="defsh"><span class="octicon octicon-link"></span></a>defs.h</h4><pre><code class="diff hljs">@@ -10,6 +10,8 @@ struct sleeplock;
+ struct stat;
+ struct superblock;
+
+<span class="hljs-addition">+#define abs(x)  ( (x&lt;0) ? -x : x )</span>
+<span class="hljs-addition">+</span>
+ // bio.c
+ void            binit(void);
+ struct buf*     bread(uint, uint);
+</code></pre><h4 id="execc"><a class="anchor hidden-xs" href="#execc" title="execc"><span class="octicon octicon-link"></span></a>exec.c</h4><blockquote>
+<p>使用者權限控制 - 執行</p>
+</blockquote><pre><code class="diff hljs"><span class="hljs-meta">@@ -7,6 +7,12 @@</span>
+ #include "x86.h"
+ #include "elf.h"
+
+<span class="hljs-addition">+#include "fs.h"</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+#include "spinlock.h"</span>
+<span class="hljs-addition">+#include "sleeplock.h"</span>
+<span class="hljs-addition">+#include "file.h"</span>
+<span class="hljs-addition">+</span>
+ int
+ exec(char *path, char **argv)
+ {
+@@ -26,9 +32,29 @@ exec(char *path, char **argv)
+     cprintf("exec: fail\n");
+     return -1;
+   }
+<span class="hljs-addition">+</span>
+   ilock(ip);
+   pgdir = 0;
+
+<span class="hljs-addition">+  short own = ip -&gt; owner;</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+  if(getuid() == 0) { }</span>
+<span class="hljs-addition">+  else if(getuid() == own){</span>
+<span class="hljs-addition">+    if(!((checkPermission(ip, 1, 0) &gt;&gt; 0) &amp; 1)) {</span>
+<span class="hljs-addition">+        iunlockput(ip);</span>
+<span class="hljs-addition">+        end_op();</span>
+<span class="hljs-addition">+        cprintf("permission denied.\n");</span>
+<span class="hljs-addition">+        exit();</span>
+<span class="hljs-addition">+    }</span>
+<span class="hljs-addition">+  } else {</span>
+<span class="hljs-addition">+    if(!((checkPermission(ip, 3, 0) &gt;&gt; 0) &amp; 1)) {</span>
+<span class="hljs-addition">+        iunlockput(ip);</span>
+<span class="hljs-addition">+        end_op();</span>
+<span class="hljs-addition">+        cprintf("permission denied.\n");</span>
+<span class="hljs-addition">+        exit();</span>
+<span class="hljs-addition">+    }</span>
+<span class="hljs-addition">+  }</span>
+<span class="hljs-addition">+</span>
+   // Check ELF header
+   if(readi(ip, (char*)&amp;elf, 0, sizeof(elf)) != sizeof(elf))
+     goto bad;
+</code></pre><h4 id="filec"><a class="anchor hidden-xs" href="#filec" title="filec"><span class="octicon octicon-link"></span></a>file.c</h4><blockquote>
+<p>使用者權限控制 - 讀/寫</p>
+</blockquote><pre><code class="diff hljs">@@ -96,14 +96,31 @@ filestat(struct file *f, struct stat *st)
+ int
+ fileread(struct file *f, char *addr, int n)
+ {
+<span class="hljs-addition">+  struct inode *id = f-&gt;ip;</span>
+<span class="hljs-addition">+  // </span>
+   int r;
+<span class="hljs-deletion">-</span>
+   if(f-&gt;readable == 0)
+     return -1;
+   if(f-&gt;type == FD_PIPE)
+     return piperead(f-&gt;pipe, addr, n);
+   if(f-&gt;type == FD_INODE){
+     ilock(f-&gt;ip);
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+    if(getuid() == 0) { }</span>
+<span class="hljs-addition">+    else if(getuid()==id-&gt;owner){</span>
+<span class="hljs-addition">+      if(!((checkPermission(id, 1, 0) &gt;&gt; 2) &amp; 1)) {</span>
+<span class="hljs-addition">+          cprintf("permission denied.\n");</span>
+<span class="hljs-addition">+          iunlock(f-&gt;ip);</span>
+<span class="hljs-addition">+          exit();</span>
+<span class="hljs-addition">+      }</span>
+<span class="hljs-addition">+    } else {</span>
+<span class="hljs-addition">+      if(!((checkPermission(id, 3, 0) &gt;&gt; 2) &amp; 1)) {</span>
+<span class="hljs-addition">+          cprintf("permission denied.\n");</span>
+<span class="hljs-addition">+          iunlock(f-&gt;ip);</span>
+<span class="hljs-addition">+          exit();</span>
+<span class="hljs-addition">+      }</span>
+<span class="hljs-addition">+    }</span>
+<span class="hljs-addition">+</span>
+     if((r = readi(f-&gt;ip, addr, f-&gt;off, n)) &gt; 0)
+       f-&gt;off += r;
+     iunlock(f-&gt;ip);
+@@ -117,8 +134,10 @@fileread(struct file *f, char *addr, int n)
+ int
+ filewrite(struct file *f, char *addr, int n)
+ {
+<span class="hljs-deletion">-  int r;</span>
+<span class="hljs-addition">+  struct inode *id = f-&gt;ip;</span>
+<span class="hljs-addition">+  // cprintf("(%d %d)", getuid(), id-&gt;owner);</span>
+
+<span class="hljs-addition">+  int r;</span>
+   if(f-&gt;writable == 0)
+     return -1;
+   if(f-&gt;type == FD_PIPE)
+@@ -139,6 +158,24 @@ filewrite(struct file *f, char *addr, int n)
+
+       begin_op();
+       ilock(f-&gt;ip);
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+      if(getuid() == 0) { }</span>
+<span class="hljs-addition">+      else if(getuid() == id -&gt; owner){</span>
+<span class="hljs-addition">+        if(!((checkPermission(id, 1, 0) &gt;&gt; 1) &amp; 1)) {</span>
+<span class="hljs-addition">+            cprintf("WRITE: permission denied.\n");</span>
+<span class="hljs-addition">+            iunlock(f-&gt;ip);</span>
+<span class="hljs-addition">+            end_op();</span>
+<span class="hljs-addition">+            exit();</span>
+<span class="hljs-addition">+        }</span>
+<span class="hljs-addition">+      } else {</span>
+<span class="hljs-addition">+        if(!((checkPermission(id, 3, 0) &gt;&gt; 1) &amp; 1)) {</span>
+<span class="hljs-addition">+            cprintf("WRITE: permission denied.\n");</span>
+<span class="hljs-addition">+            iunlock(f-&gt;ip);</span>
+<span class="hljs-addition">+            end_op();</span>
+<span class="hljs-addition">+            exit();</span>
+<span class="hljs-addition">+        }</span>
+<span class="hljs-addition">+      }</span>
+<span class="hljs-addition">+</span>
+       if ((r = writei(f-&gt;ip, addr + i, f-&gt;off, n1)) &gt; 0)
+         f-&gt;off += r;
+       iunlock(f-&gt;ip);
+@@ -155,3 +192,22 @@ filewrite(struct file *f, char *addr, int n)
+   panic("filewrite");
+ }
+
+<span class="hljs-addition">+// identity must be 1/2/3, user:1, group:2, other:3</span>
+<span class="hljs-addition">+// binary must be 0 or 1, decide return format</span>
+<span class="hljs-addition">+// ex: when binary is 0, return 7,else return 111</span>
+<span class="hljs-addition">+int</span>
+<span class="hljs-addition">+checkPermission(const struct inode *id, int identity, int binary)</span>
+<span class="hljs-addition">+{</span>
+<span class="hljs-addition">+  int rwx = -1;</span>
+<span class="hljs-addition">+  int permission = id-&gt;permission;</span>
+<span class="hljs-addition">+  // cprintf("ckp:%d\n", permission);</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+  if(identity==1){</span>
+<span class="hljs-addition">+    rwx = permission/100;</span>
+<span class="hljs-addition">+  } else if(identity==2) {</span>
+<span class="hljs-addition">+    rwx = (permission % 100)/10;</span>
+<span class="hljs-addition">+  } else if(identity==3) {</span>
+<span class="hljs-addition">+    rwx = (permission % 10);</span>
+<span class="hljs-addition">+  }</span>
+<span class="hljs-addition">+  return rwx;</span>
+<span class="hljs-addition">+}</span>
+</code></pre><h4 id="fileh"><a class="anchor hidden-xs" href="#fileh" title="fileh"><span class="octicon octicon-link"></span></a>file.h</h4><pre><code class="diff hljs">@@ -38,5 +38,5 @@ struct devsw {
+ };
+
+ extern struct devsw devsw[];
+<span class="hljs-deletion">-</span>
+<span class="hljs-addition">+int checkPermission(const struct inode *id, int identity, int binary);</span>
+ #define CONSOLE 1
+</code></pre><h4 id="fsc"><a class="anchor hidden-xs" href="#fsc" title="fsc"><span class="octicon octicon-link"></span></a>fs.c</h4><pre><code class="diff hljs">@@ -207,7 +207,7 @@ ialloc(uint dev, short type)
+     if(dip-&gt;type == 0){  // a free inode
+       memset(dip, 0, sizeof(*dip));
+       dip-&gt;type = type;
+<span class="hljs-deletion">-      dip-&gt;permission = 700;</span>
+<span class="hljs-addition">+      dip-&gt;permission = 777;</span>
+       dip-&gt;owner = 0;
+       dip-&gt;group = 0;
+       log_write(bp);   // mark it allocated on the disk
+</code></pre><h4 id="gogopwc"><a class="anchor hidden-xs" href="#gogopwc" title="gogopwc"><span class="octicon octicon-link"></span></a>gogopw.c</h4><blockquote>
+<p>使使用者晉升為第二重權限的程式</p>
+</blockquote><pre><code class="diff hljs"><span class="hljs-meta">@@ -0,0 +1,80 @@</span>
+<span class="hljs-addition">+#include "types.h"</span>
+<span class="hljs-addition">+#include "user.h"</span>
+<span class="hljs-addition">+#include "stat.h"</span>
+<span class="hljs-addition">+#include "fcntl.h"</span>
+<span class="hljs-addition">+#include "login_util.h"</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+#define BUFSIZE 128</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+#define abs(x)  ( (x&lt;0) ? -x : x )</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+int check(char* password)</span>
+<span class="hljs-addition">+{</span>
+<span class="hljs-addition">+    if (password[strlen(password) - 1] == '\n')</span>
+<span class="hljs-addition">+        password[strlen(password) - 1] = '\0';</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+    int fd;</span>
+<span class="hljs-addition">+    if ((fd = open("/passwd", O_RDONLY)) &lt; 0) {</span>
+<span class="hljs-addition">+        printf(1, "[x] Login: open passwd file failed\n");</span>
+<span class="hljs-addition">+        close(fd);</span>
+<span class="hljs-addition">+        return 0;</span>
+<span class="hljs-addition">+    }</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+    int n;</span>
+<span class="hljs-addition">+    char buf[512], cid_tmp[BUFSIZE], user_tmp[BUFSIZE], pass_tmp[BUFSIZE], id_tmp[BUFSIZE];</span>
+<span class="hljs-addition">+    while ((n = read(fd, buf, sizeof(buf))) &gt; 0) {</span>
+<span class="hljs-addition">+        for (int i = 0; i &lt; n; ++i) {</span>
+<span class="hljs-addition">+            i = readPasswd(buf, cid_tmp, user_tmp, pass_tmp, id_tmp, n, i);</span>
+<span class="hljs-addition">+            if (i == -1) break;</span>
+<span class="hljs-addition">+            </span>
+<span class="hljs-addition">+            char* hash_pass = hashPasswd(password);</span>
+<span class="hljs-addition">+            int now = 0, id = 0;</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+            for (int i = 0; id_tmp[i] != ';' &amp;&amp; id_tmp[i] != '\0'; i++, now++) {</span>
+<span class="hljs-addition">+                id *= 10;</span>
+<span class="hljs-addition">+                id += id_tmp[i] - '0';</span>
+<span class="hljs-addition">+            }</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+            if (!strcmp(hash_pass, pass_tmp) &amp;&amp; abs(getuid()) == id) {</span>
+<span class="hljs-addition">+                return 1;</span>
+<span class="hljs-addition">+            }</span>
+<span class="hljs-addition">+        }</span>
+<span class="hljs-addition">+        close(fd);</span>
+<span class="hljs-addition">+    }</span>
+<span class="hljs-addition">+    return 0;</span>
+<span class="hljs-addition">+}</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+int main(void)</span>
+<span class="hljs-addition">+{</span>
+<span class="hljs-addition">+    printf(1, "[*] Go go power ranger!\n");</span>
+<span class="hljs-addition">+    </span>
+<span class="hljs-addition">+    char *password;</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+    char buf[BUFSIZE] = {0};</span>
+<span class="hljs-addition">+    printf(1, "[+] Password: ");</span>
+<span class="hljs-addition">+    password = gets(buf, BUFSIZE);</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+    if (check(password)) {</span>
+<span class="hljs-addition">+        int pid = fork();</span>
+<span class="hljs-addition">+        if(pid &lt; 0) {</span>
+<span class="hljs-addition">+            printf(1, "gogopw: fork failed.\n");</span>
+<span class="hljs-addition">+            exit();</span>
+<span class="hljs-addition">+        }</span>
+<span class="hljs-addition">+        if(pid == 0) {</span>
+<span class="hljs-addition">+            printf(1, "You are a power ranger!\n");</span>
+<span class="hljs-addition">+            int uid = getuid();</span>
+<span class="hljs-addition">+            setuid(abs(uid));</span>
+<span class="hljs-addition">+            char* argv[] = { "sh", 0 };</span>
+<span class="hljs-addition">+            exec("sh", argv);</span>
+<span class="hljs-addition">+            printf(1, "gogopw: exec sh failed\n");</span>
+<span class="hljs-addition">+            exit();</span>
+<span class="hljs-addition">+        }</span>
+<span class="hljs-addition">+        wait();</span>
+<span class="hljs-addition">+        printf(1, "Power down :3 \n"); </span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+    } else {</span>
+<span class="hljs-addition">+        printf(1, "You can't be a power ranger :(\n");</span>
+<span class="hljs-addition">+    }</span>
+<span class="hljs-addition">+    </span>
+<span class="hljs-addition">+    exit();</span>
+<span class="hljs-addition">+}</span>
+</code></pre><h4 id="loginc"><a class="anchor hidden-xs" href="#loginc" title="loginc"><span class="octicon octicon-link"></span></a>login.c</h4><blockquote>
+<p>修改為登入後僅為初級權限<br>
+改為使用學生證登入</p>
+</blockquote><pre><code class="diff hljs"><span class="hljs-meta">@@ -6,12 +6,10 @@</span>
+
+ #define BUFSIZE 128
+
+<span class="hljs-deletion">-int check(char* username, char* password)</span>
+<span class="hljs-addition">+int checkID(char* cardID, char* username)</span>
+ {
+<span class="hljs-deletion">-    if (username[strlen(username) - 1] == '\n')</span>
+<span class="hljs-deletion">-        username[strlen(username) - 1] = '\0';</span>
+<span class="hljs-deletion">-    if (password[strlen(password) - 1] == '\n')</span>
+<span class="hljs-deletion">-        password[strlen(password) - 1] = '\0';</span>
+<span class="hljs-addition">+    if (cardID[strlen(cardID) - 1] == '\n')</span>
+<span class="hljs-addition">+        cardID[strlen(cardID) - 1] = '\0';</span>
+
+     int fd;
+     if ((fd = open("/passwd", O_RDONLY)) &lt; 0) {
+@@ -21,75 +19,104 @@ int check(char* username, char* password)
+     }
+
+     int n;
+<span class="hljs-deletion">-    char buf[512], user_tmp[BUFSIZE], pass_tmp[BUFSIZE], id_tmp[BUFSIZE];</span>
+<span class="hljs-addition">+    char buf[512], cid_tmp[BUFSIZE], pass_tmp[BUFSIZE], id_tmp[BUFSIZE];</span>
+     while ((n = read(fd, buf, sizeof(buf))) &gt; 0) {
+         for (int i = 0; i &lt; n; ++i) {
+<span class="hljs-deletion">-            i = readPasswd(buf, user_tmp, pass_tmp, id_tmp, n, i);</span>
+<span class="hljs-addition">+            i = readPasswd(buf, cid_tmp, username, pass_tmp, id_tmp, n, i);</span>
+             if (i == -1) break;
+
+<span class="hljs-deletion">-            char* hash_pass = hashPasswd(password);</span>
+<span class="hljs-deletion">-            if (!strcmp(username, user_tmp) &amp;&amp; !strcmp(hash_pass, pass_tmp)) {</span>
+<span class="hljs-addition">+            if (!strcmp(cardID, cid_tmp) ) {</span>
+                 int now = 0, id = 0;
+<span class="hljs-deletion">-</span>
+                 for (int i = 0; id_tmp[i] != ';' &amp;&amp; id_tmp[i] != '\0'; i++, now++) {
+                     id *= 10;
+                     id += id_tmp[i] - '0';
+                 }
+<span class="hljs-addition">+                close(fd);</span>
+                 return id;
+             }
+         }
+<span class="hljs-deletion">-        close(fd);</span>
+     }
+<span class="hljs-addition">+    close(fd);</span>
+     return -1;
+ }
+
+ int main(void)
+ {
+<span class="hljs-deletion">-    printf(1, "\n\n\n");</span>
+<span class="hljs-deletion">-    printf(1, "　　　　　　 ／ﾌﾌ 　　　　　　 　ム｀ヽ\n");</span>
+<span class="hljs-deletion">-    printf(1, "　　　　　　/ ノ)　　 ∧∧　　　　　）　ヽ\n");</span>
+<span class="hljs-deletion">-    printf(1, "　　　　　ﾞ/ ｜　　(´・ω・`）ノ⌒（ゝ._,ノ\n");</span>
+<span class="hljs-deletion">-    printf(1, "　　　　　/　ﾉ⌒7⌒ヽーく　 ＼　／\n");</span>
+<span class="hljs-deletion">-    printf(1, "　　　　　丶＿ ノ ｡　　 ノ､　　｡|/\n");</span>
+<span class="hljs-deletion">-    printf(1, "　　　　　　　 `ヽ `ー-'_人`ーﾉ\n");</span>
+<span class="hljs-deletion">-    printf(1, "　　　　　　　　 丶 ￣ _人'彡ﾉ\n");</span>
+<span class="hljs-deletion">-    printf(1, "　　　　　　　　　ﾉ　　r'十ヽ/\n\n\n");</span>
+     printf(1, "[*] Meow! Time to login!\n");
+
+     while (1) {
+<span class="hljs-deletion">-        char *username, *password;</span>
+<span class="hljs-addition">+        char *cardID;</span>
+<span class="hljs-addition">+        char *username = {0};</span>
+<span class="hljs-addition">+        // char *password;</span>
+
+         char buf1[BUFSIZE] = {0};
+<span class="hljs-deletion">-        printf(1, "[+] Username: ");</span>
+<span class="hljs-deletion">-        username = gets(buf1, BUFSIZE);</span>
+<span class="hljs-addition">+        printf(1,"         -------------------------------------------------------------------------------- \n");</span>
+<span class="hljs-addition">+        printf(1,"        |+mmmNNNmmmmmmmmmmmmmmmmmmdddddddddddddddddmddmmmmmmN+                           |\n");</span>
+<span class="hljs-addition">+        printf(1,"        |yNmh+o+hNhysymhymmysddhhddhdddhhmdymdyhdmmmmmmmmmdmM+     o+-h//h/:-`   -+      |\n");</span>
+<span class="hljs-addition">+        printf(1,"        |hMo +y+`yo/-+dsysd::oh/-ssosyys+my/dh//yNmNNdhmN: -M+    `--`.``.`-.`   ``      |\n");</span>
+<span class="hljs-addition">+        printf(1,"        |dNN/`:`+NdhddddddmdhddhddddddddhhdmhmddNmN:   `oh. ss     /+.o:/d:+y`.`.+/      |\n");</span>
+<span class="hljs-addition">+        printf(1,"        |dNmNNmNNmNNNNmmNNNNmmmmmmmmmmmNNdNh/- `sNMh` .` `` .:                           |\n");</span>
+<span class="hljs-addition">+        printf(1,"        |mNmNNNNNNNNNNNNNNNNNNNNmmNNdmMy` Ny ``  .hMo .do`   `          .--::-.          |\n");</span>
+<span class="hljs-addition">+        printf(1,"        |mNmNNNNmNNNNNNNNNNNNNmydMo  `dy  Ns `d:   :m/ -NNyymo      .oyhdddddddhs.       |\n");</span>
+<span class="hljs-addition">+        printf(1,"        |mNmNNNNNNNNNNNNNhs/h+  `dy   `:  N+ `mMy../oNNNNNNNM+     -hddddhhdddddhdo`     |\n");</span>
+<span class="hljs-addition">+        printf(1,"        |mmmmNNNNNNhshMMm-  `Nh` `- :/   `m:`/NNNNNNNNNNNNNNM+    `hdho/-::---/yddds     |\n");</span>
+<span class="hljs-addition">+        printf(1,"        |NNNNd++Ms    -dMh   :Mm-   .Ms-+ymhhMMNNNNNNNMNNNNNM+    :mh-     `  ``.ymh`    |\n");</span>
+<span class="hljs-addition">+        printf(1,"        |/:. -oyM/ :/   +My   sMMo+sddshM/   hMNNNMNNNNMNNNNM+    `hy.```    ``.`:hs     |\n");</span>
+<span class="hljs-addition">+        printf(1,"        |o   :NMM- /My`  .y+:oddso+o:  `dd   .NMMMMMMMMMMMNNM+     ++.-:::---:::/-o+     |\n");</span>
+<span class="hljs-addition">+        printf(1,"        |M/   sMN` /MMmoydmMm+`.+ydNm`   /+   /MMMMMMMMMMMNNMo     --:-..-/-/.--:-:-     |\n");</span>
+<span class="hljs-addition">+        printf(1,"        |NN-  `Nm+smdy+:`-sN.  dMMMMMs   sM+ `:mMMMMMMMMMMMNMo     `.   ``` ``` ``.`     |\n");</span>
+<span class="hljs-addition">+        printf(1,"        |NMdohmyo:/-   hMysd`  -mMMd+s/ -+MMNMMMMMMMMMMMMMMNMo      ```  ```.` ``.`      |\n");</span>
+<span class="hljs-addition">+        printf(1,"        |h+/.   +mMd`   -+sMh.   ``:omMMMMMNhyNMMddMMMdhmMMNMo       ```.----.````       |\n");</span>
+<span class="hljs-addition">+        printf(1,"        |dodm.  `mMM+   os+.-NNmmNMMMMMMMMMMhyNMMdhNMMhydMMNMo        ````  `````        |\n");</span>
+<span class="hljs-addition">+        printf(1,"        |NNMMh   /MMN- -+ohNMMMMMMMMMMMMMMMmhdmdddddhmNddMMMMo        ``````````         |\n");</span>
+<span class="hljs-addition">+        printf(1,"        |NMmyh:   shyhhhhhhhhhhhhhhhhhhhhhhhhhhhhhddddddmMMNMo          ``````           |\n");</span>
+<span class="hljs-addition">+        printf(1,"        |NM:    nn nnn nnnn nnn  n nnn  nn n  nnnn      `NMMMo                           |\n");</span>
+<span class="hljs-addition">+        printf(1,"        |MM-    NN NNN NNNN NNN  N NNN  NN N  NNNN      `NMMMo     `:::`  -/-  `-:-      |\n");</span>
+<span class="hljs-addition">+        printf(1,"        |MN.    NN NNN NNNN NNN  N NNN  NN N  NNNN      `NMMMo     `/oo- `o+o. .yyh.     |\n");</span>
+<span class="hljs-addition">+        printf(1,"        |MN`    NN NNN NNNN NNN  N NNN  NN N  NNNN      `NMMMo  :-.--```..`.-``...-.```  |\n");</span>
+<span class="hljs-addition">+        printf(1,"        |MN+::::::::::::::::::::::::::-:::--------------/MMMMs  sy-yo ``o+/+++:+o++/+o/  |\n");</span>
+<span class="hljs-addition">+        printf(1,"        |hmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNMMNMMMMMMMMMMMs                           |\n");</span>
+<span class="hljs-addition">+        printf(1,"         `------------------------------------------------------------------------------ \n\n");</span>
+<span class="hljs-addition">+        printf(1, "[SCANNING ID CARD...]");</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+        cardID = gets_hidden(buf1, BUFSIZE);</span>
+
+<span class="hljs-deletion">-        char buf2[BUFSIZE] = {0};</span>
+<span class="hljs-deletion">-        printf(1, "[+] Password: ");</span>
+<span class="hljs-deletion">-        password = gets(buf2, BUFSIZE);</span>
+<span class="hljs-addition">+        // char buf2[BUFSIZE] = {0};</span>
+<span class="hljs-addition">+        // printf(1, "[+] Password: ");</span>
+<span class="hljs-addition">+        // password = gets(buf2, BUFSIZE);</span>
+
+         dup(0); // stdout
+         dup(0); // stderr
+
+         int uid = -1;
+<span class="hljs-deletion">-        if ((uid = check(username, password)) &gt;= 0) {</span>
+<span class="hljs-addition">+        if ((uid = checkID(cardID, username)) &gt;= 0) {</span>
+             printf(1, "[+] Login suceesfully.\n");
+<span class="hljs-addition">+            printf(1, "\n\n\n");</span>
+<span class="hljs-addition">+            printf(1, "　　　　　　 ／ﾌﾌ 　　　　　　 　ム｀ヽ\n");</span>
+<span class="hljs-addition">+            printf(1, "　　　　　　/ ノ)　　 ∧∧　　　　　）　ヽ\n");</span>
+<span class="hljs-addition">+            printf(1, "　　　　　ﾞ/ ｜　　(´・ω・`）ノ⌒（ゝ._,ノ\n");</span>
+<span class="hljs-addition">+            printf(1, "　　　　　/　ﾉ⌒7⌒ヽーく　 ＼　／\n");</span>
+<span class="hljs-addition">+            printf(1, "　　　　　丶＿ ノ ｡　　 ノ､　　｡|/\n");</span>
+<span class="hljs-addition">+            printf(1, "　　　　　　　 `ヽ `ー-'_人`ーﾉ\n");</span>
+<span class="hljs-addition">+            printf(1, "　　　　　　　　 丶 ￣ _人'彡ﾉ\n");</span>
+<span class="hljs-addition">+            printf(1, "　　　　　　　　　ﾉ　　r'十ヽ/\n\n\n");</span>
+
+             int pid = fork();
+<span class="hljs-deletion">-            if(pid &lt; 0){</span>
+<span class="hljs-addition">+            if(pid &lt; 0) {</span>
+                 printf(1, "login: fork failed.\n");
+                 exit();
+             }
+<span class="hljs-deletion">-            if(pid == 0){</span>
+<span class="hljs-deletion">-                setuid(uid);</span>
+<span class="hljs-deletion">-                printf(1, "Hello, %s.\n", username);</span>
+<span class="hljs-addition">+            if(pid == 0) {</span>
+<span class="hljs-addition">+                printf(1, "Hello, "); printf(1, username); printf(1, "\n");</span>
+                 char* argv[] = { "sh", 0 };
+<span class="hljs-addition">+                setuid(-uid);</span>
+                 exec("sh", argv);
+                 printf(1, "login: exec sh failed\n");
+                 exit();
+             }
+             wait();
+
+<span class="hljs-deletion">-            printf(1, "Goodbye %s.\n", username); </span>
+<span class="hljs-addition">+            printf(1, "Goodbye!\n"); </span>
+         } else {
+             printf(1, "[x] Login failed.\n");
+         }
+</code></pre><h4 id="login_utilh"><a class="anchor hidden-xs" href="#login_utilh" title="login_utilh"><span class="octicon octicon-link"></span></a>login_util.h</h4><blockquote>
+<p>新增從 <code>/passwd</code> 讀取卡號的功能</p>
+</blockquote><pre><code class="diff hljs">@@ -18,9 +18,20 @@ char* hashPasswd(char* pass)
+     return hashed;
+ }
+
+<span class="hljs-deletion">-int readPasswd(char* buf, char* user_tmp, char* pass_tmp, char* uid_tmp, int n, int i)</span>
+<span class="hljs-addition">+int readPasswd(char* buf, char* cid_tmp, char* user_tmp, char* pass_tmp, char* uid_tmp, int n, int i)</span>
+ {
+     int now = 0;
+<span class="hljs-addition">+    for (; buf[i] != ';' || i == n; i++, now++) {</span>
+<span class="hljs-addition">+        cid_tmp[now] = buf[i];</span>
+<span class="hljs-addition">+    }</span>
+<span class="hljs-addition">+    i++;</span>
+<span class="hljs-addition">+    cid_tmp[now] = '\0';</span>
+<span class="hljs-addition">+    if (i &gt;= n) {</span>
+<span class="hljs-addition">+        printf(1, "Login: Parse passwd error\n");</span>
+<span class="hljs-addition">+        return -1;</span>
+<span class="hljs-addition">+    }</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+    now = 0;</span>
+     for (; buf[i] != ';' || i == n; i++, now++) {
+         user_tmp[now] = buf[i];
+     }  
+</code></pre><h4 id="passwd"><a class="anchor hidden-xs" href="#passwd" title="passwd"><span class="octicon octicon-link"></span></a>passwd</h4><blockquote>
+<p>新增卡號欄位</p>
+</blockquote><pre><code class="diff hljs"><span class="hljs-meta">@@ -1,2 +1,4 @@</span>
+<span class="hljs-deletion">-root;CE5CA673D13B36118D54A7CF13AEB0CA012383BF771E713421B4D1FD841F539A;0;0</span>
+<span class="hljs-deletion">-test;9F86D081884C7D659A2FEAA0C55AD015A3BF4F1B2B0B822CD15D6C15B0F00A08;1000;1000</span>
+\ No newline at end of file
+<span class="hljs-addition">+root;root;CE5CA673D13B36118D54A7CF13AEB0CA012383BF771E713421B4D1FD841F539A;0;0</span>
+<span class="hljs-addition">+0094982674;splitline;9F86D081884C7D659A2FEAA0C55AD015A3BF4F1B2B0B822CD15D6C15B0F00A08;1000;1000</span>
+<span class="hljs-addition">+0687352229;hank;9F86D081884C7D659A2FEAA0C55AD015A3BF4F1B2B0B822CD15D6C15B0F00A08;1001;1001</span>
+<span class="hljs-addition">+1643751269;aaron;9F86D081884C7D659A2FEAA0C55AD015A3BF4F1B2B0B822CD15D6C15B0F00A08;1002;1002</span>
+</code></pre><h4 id="procc"><a class="anchor hidden-xs" href="#procc" title="procc"><span class="octicon octicon-link"></span></a>proc.c</h4><blockquote>
+<p>uid 顯示能區分雙層權限</p>
+</blockquote><pre><code class="diff hljs">@@ -540,20 +540,21 @@ ps(void)
+ {
+   struct proc *p;
+   acquire(&amp;ptable.lock);
+<span class="hljs-deletion">-  cprintf("UID\tGID\t\t name \t pid \t state \n\n");</span>
+<span class="hljs-addition">+  cprintf("UID\t\tGID\tname\t\tpid\tstate\n\n");</span>
+   for(p = ptable.proc; p &lt; &amp;ptable.proc[NPROC]; p++)
+   {
+<span class="hljs-addition">+    if(p-&gt;uid &lt; 0) cprintf("(*)");</span>
+     if(p-&gt;state == SLEEPING)
+     {
+<span class="hljs-deletion">-      cprintf("%d\t%d\t\t %s \t %d \t SLEEPING\n",p-&gt;uid,p-&gt;gid,p-&gt;name,p-&gt;pid);</span>
+<span class="hljs-addition">+      cprintf("%d\t\t%d\t%s\t\t%d\tSLEEPING\n",abs(p-&gt;uid),p-&gt;gid,p-&gt;name,p-&gt;pid);</span>
+     }
+     else if(p-&gt;state == RUNNING)
+     {
+<span class="hljs-deletion">-      cprintf("%d\t%d\t\t %s \t %d \t RUNNING\n",p-&gt;uid,p-&gt;gid,p-&gt;name,p-&gt;pid);</span>
+<span class="hljs-addition">+      cprintf("%d\t\t%d\t%s\t\t%d\tRUNNING\n",abs(p-&gt;uid),p-&gt;gid,p-&gt;name,p-&gt;pid);</span>
+     }
+     else if(p-&gt;state == RUNNABLE)
+     {
+<span class="hljs-deletion">-      cprintf("%d\t%d\t\t %s \t %d \t RUNNABLE\n",p-&gt;uid,p-&gt;gid,p-&gt;name,p-&gt;pid);</span>
+<span class="hljs-addition">+      cprintf("%d\t\t%d\t%s\t\t%d\tRUNNABLE\n",abs(p-&gt;uid),p-&gt;gid,p-&gt;name,p-&gt;pid);</span>
+     }
+   }
+   release(&amp;ptable.lock);
+</code></pre><h4 id="psc"><a class="anchor hidden-xs" href="#psc" title="psc"><span class="octicon octicon-link"></span></a>ps.c</h4><pre><code class="diff hljs"><span class="hljs-meta">@@ -2,9 +2,11 @@</span>
+ #include "stat.h"
+ #include "user.h"
+
+<span class="hljs-addition">+#define abs(x)  ( (x&lt;0) ? -x : x )</span>
+<span class="hljs-addition">+</span>
+ int main()
+ {
+<span class="hljs-deletion">-    printf(1, "Your uid: %d\n", getuid());</span>
+<span class="hljs-addition">+    printf(1, "Your uid: %d\n", abs(getuid()));</span>
+     ps();
+     wait();
+     exit();
+</code></pre><h4 id="syscallc"><a class="anchor hidden-xs" href="#syscallc" title="syscallc"><span class="octicon octicon-link"></span></a>syscall.c</h4><blockquote>
+<p>新增一個 system call，能用以控制是否要在使用者輸入東西時，同時顯示出輸入的東西。</p>
+</blockquote><pre><code class="diff hljs">@@ -103,6 +103,7 @@ extern int sys_unlink(void);
+ extern int sys_wait(void);
+ extern int sys_write(void);
+ extern int sys_uptime(void);
+<span class="hljs-addition">+extern int sys_swecho(void);</span>
+
+ extern int sys_ps(void);
+ extern int sys_setuid(void);
+@@ -133,6 +134,7 @@ static int (*syscalls[])(void) = {
+ [SYS_link]    sys_link,
+ [SYS_mkdir]   sys_mkdir,
+ [SYS_close]   sys_close,
+<span class="hljs-addition">+[SYS_swecho]  sys_swecho,</span>
+
+ [SYS_ps]      sys_ps,
+ [SYS_setuid]  sys_setuid,
+</code></pre><h4 id="syscallh"><a class="anchor hidden-xs" href="#syscallh" title="syscallh"><span class="octicon octicon-link"></span></a>syscall.h</h4><pre><code class="diff hljs"><span class="hljs-meta">@@ -27,3 +27,5 @@</span>
+
+ #define SYS_getcwd 25
+ #define SYS_chmod  26
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+#define SYS_swecho 27</span>
+</code></pre><h4 id="sysfilec"><a class="anchor hidden-xs" href="#sysfilec" title="sysfilec"><span class="octicon octicon-link"></span></a>sysfile.c</h4><pre><code class="diff hljs">@@ -265,7 +265,7 @@ create(char *path, short type, short major, short minor)
+   ip-&gt;major = major;
+   ip-&gt;minor = minor;
+   ip-&gt;nlink = 1;
+<span class="hljs-deletion">-  ip-&gt;owner = getuid();</span>
+<span class="hljs-addition">+  ip-&gt;owner = abs(getuid());</span>
+   iupdate(ip);
+
+   if(type == T_DIR){  // Create . and .. entries.
+@@ -498,6 +498,7 @@ sys_getcwd(void) {
+       return -1;
+   return traversal(path, n, myproc()-&gt;cwd);
+ }
+<span class="hljs-addition">+</span>
+ int
+ sys_chmod(void)
+ {
+@@ -523,7 +524,7 @@ sys_chmod(void)
+     return -3;
+   }
+   ilock(id);
+<span class="hljs-deletion">-  if(id-&gt;owner != user_id || user_id == 0 )</span>
+<span class="hljs-addition">+  if(id-&gt;owner != user_id &amp;&amp; user_id != 0)</span>
+   {
+     iupdate(id);
+     iunlockput(id);
+@@ -537,36 +538,9 @@ sys_chmod(void)
+   return mod;
+ }
+
+<span class="hljs-deletion">-// identity must be 1/2/3, user:1, group:2, other:3</span>
+<span class="hljs-deletion">-// binary must be 0 or 1, decide return format</span>
+<span class="hljs-deletion">-// ex: when binary is 0, return 7,else return 111</span>
+ int
+<span class="hljs-deletion">-checkPermission(const struct inode *id, int identity, int binary)</span>
+<span class="hljs-addition">+sys_swecho(void)</span>
+ {
+<span class="hljs-deletion">-	int rwx=-1;</span>
+<span class="hljs-deletion">-	int permission = id-&gt;permission;</span>
+<span class="hljs-deletion">-	if(identity==1){</span>
+<span class="hljs-deletion">-		rwx = permission/100;</span>
+<span class="hljs-deletion">-	} else if(identity==2){</span>
+<span class="hljs-deletion">-		rwx = (permission % 100)/10;</span>
+<span class="hljs-deletion">-	} else if(identity==3){</span>
+<span class="hljs-deletion">-		rwx = (permission % 10);</span>
+<span class="hljs-deletion">-	}</span>
+<span class="hljs-deletion">-	if(binary==1){</span>
+<span class="hljs-deletion">-		int binrwx=0;</span>
+<span class="hljs-deletion">-		for (int c = 2; c &gt;= 0; c--)</span>
+<span class="hljs-deletion">-		{</span>
+<span class="hljs-deletion">-      int k = rwx % 2;</span>
+<span class="hljs-deletion">-			rwx = rwx &gt;&gt; c;</span>
+<span class="hljs-deletion">-			int product = 1;</span>
+<span class="hljs-deletion">-			for(int i=1;i&lt;=c;i++){</span>
+<span class="hljs-deletion">-				product*=10;</span>
+<span class="hljs-deletion">-			}</span>
+<span class="hljs-deletion">-			if (k)</span>
+<span class="hljs-deletion">-				binrwx+=1*product;</span>
+<span class="hljs-deletion">-		}</span>
+<span class="hljs-deletion">-		return binrwx;</span>
+<span class="hljs-deletion">-	} else {</span>
+<span class="hljs-deletion">-		return rwx;</span>
+<span class="hljs-deletion">-	}</span>
+<span class="hljs-addition">+  input_hidden = !input_hidden;</span>
+<span class="hljs-addition">+  return 0;</span>
+ }
+</code></pre><h4 id="sysprocc"><a class="anchor hidden-xs" href="#sysprocc" title="sysprocc"><span class="octicon octicon-link"></span></a>sysproc.c</h4><pre><code class="diff hljs">@@ -99,9 +99,9 @@ sys_ps(void)
+ int
+ sys_setuid(void)
+ {
+<span class="hljs-deletion">-  uint uargv;</span>
+<span class="hljs-addition">+  int uargv;</span>
+   argint(0, (int*)&amp;uargv);
+<span class="hljs-deletion">-  if (myproc()-&gt;uid == 0) {</span>
+<span class="hljs-addition">+  if (myproc()-&gt;uid &lt;= 0) {</span>
+     myproc()-&gt;uid = uargv;
+     return 0;
+   }
+@@ -114,10 +114,3 @@ sys_getuid(void)
+   return getuid();
+ }
+
+<span class="hljs-deletion">-</span>
+<span class="hljs-deletion">-</span>
+<span class="hljs-deletion">-// int sys_getcwd(void)</span>
+<span class="hljs-deletion">-// {</span>
+<span class="hljs-deletion">-//   char *addr;</span>
+<span class="hljs-deletion">-//   return (int)getcwd(addr);</span>
+<span class="hljs-deletion">-// }</span>
+</code></pre><h4 id="typesh"><a class="anchor hidden-xs" href="#typesh" title="typesh"><span class="octicon octicon-link"></span></a>types.h</h4><pre><code class="diff hljs">@@ -2,3 +2,5 @@ typedef unsigned int   uint;
+ typedef unsigned short ushort;
+ typedef unsigned char  uchar;
+ typedef uint pde_t;
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+extern short input_hidden;</span>
+\ No newline at end of file
+</code></pre><h4 id="ulibc"><a class="anchor hidden-xs" href="#ulibc" title="ulibc"><span class="octicon octicon-link"></span></a>ulib.c</h4><blockquote>
+<p>新增類似 linux 輸入密碼時那樣，輸入時不會顯示輸入內容的輸入方式。<br>
+新增 trim 函式用以處理輸入字串</p>
+</blockquote><pre><code class="diff hljs">@@ -67,6 +67,26 @@ gets(char *buf, int max)
+   return buf;
+ }
+
+<span class="hljs-addition">+char*</span>
+<span class="hljs-addition">+gets_hidden(char *buf, int max)</span>
+<span class="hljs-addition">+{</span>
+<span class="hljs-addition">+  int i, cc;</span>
+<span class="hljs-addition">+  char c;</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+  swecho();</span>
+<span class="hljs-addition">+  for(i=0; i+1 &lt; max; ){</span>
+<span class="hljs-addition">+    cc = read(0, &amp;c, 1);</span>
+<span class="hljs-addition">+    if(cc &lt; 1)</span>
+<span class="hljs-addition">+      break;</span>
+<span class="hljs-addition">+    buf[i++] = c;</span>
+<span class="hljs-addition">+    if(c == '\n' || c == '\r')</span>
+<span class="hljs-addition">+      break;</span>
+<span class="hljs-addition">+  }</span>
+<span class="hljs-addition">+  buf[i] = '\0';</span>
+<span class="hljs-addition">+  swecho();</span>
+<span class="hljs-addition">+  return buf;</span>
+<span class="hljs-addition">+}</span>
+<span class="hljs-addition">+</span>
+ int
+ stat(const char *n, struct stat *st)
+ {
+@@ -104,3 +124,24 @@ memmove(void *vdst, const void *vsrc, int n)
+     *dst++ = *src++;
+   return vdst;
+ }
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+char *trim(char *str)</span>
+<span class="hljs-addition">+{</span>
+<span class="hljs-addition">+  char *end;</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+  // Trim leading space</span>
+<span class="hljs-addition">+  while((unsigned char)*str == ' ' || (unsigned char)*str == '\n' || (unsigned char)*str == '\r') str++;</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+  if(*str == 0)  // All spaces?</span>
+<span class="hljs-addition">+    return str;</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+  // Trim trailing space</span>
+<span class="hljs-addition">+  end = str + strlen(str) - 1;</span>
+<span class="hljs-addition">+  while(end &gt; str &amp;&amp; ((unsigned char)*end == ' ' || (unsigned char)*end == '\n' || (unsigned char)*end == '\r')) end--;</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+  // Write new null terminator character</span>
+<span class="hljs-addition">+  end[1] = '\0';</span>
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+  return str;</span>
+<span class="hljs-addition">+}</span>
+<span class="hljs-addition">+</span>
+</code></pre><h4 id="userh"><a class="anchor hidden-xs" href="#userh" title="userh"><span class="octicon octicon-link"></span></a>user.h</h4><pre><code class="diff hljs">@@ -23,6 +23,7 @@ int getpid(void);
+ char* sbrk(int);
+ int sleep(int);
+ int uptime(void);
+<span class="hljs-addition">+int swecho(void);</span>
+
+ int ps(void);
+ int setuid(int);
+@@ -40,8 +41,10 @@ char* strchr(const char*, char c);
+ int strcmp(const char*, const char*);
+ void printf(int, const char*, ...);
+ char* gets(char*, int max);
+<span class="hljs-addition">+char* gets_hidden(char*, int max);</span>
+ uint strlen(const char*);
+ void* memset(void*, int, uint);
+ void* malloc(uint);
+ void free(void*);
+ int atoi(const char*);
+<span class="hljs-addition">+char *trim(char *str);</span>
+</code></pre><h4 id="usysS"><a class="anchor hidden-xs" href="#usysS" title="usysS"><span class="octicon octicon-link"></span></a>usys.S</h4><pre><code class="diff hljs">@@ -36,3 +36,4 @@ SYSCALL(getuid)
+
+ SYSCALL(getcwd)
+ SYSCALL(chmod)
+<span class="hljs-addition">+SYSCALL(swecho)</span>
+\ No newline at end of file
+</code></pre><hr><h1 id="-結論"><a class="anchor hidden-xs" href="#-結論" title="-結論"><span class="octicon octicon-link"></span></a><img alt=":joy:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/joy.png" title=":joy:"> 結論</h1><p>在這次的實作中，我們更深入理解了 xv6 的 file system 並將他完整改寫成類現代 Linux 的權限系統，同時也要兼顧安全性，所以在整個 kernel 讀檔寫檔的過程中都要處理權限問題。在將 RFID reader 串接的過程中，處理了較底層的 IO。</p><p>另外在實際結果上，能用 RFID 登入真的看起來蠻炫砲的，上面那個 gif 動圖超紓壓的（？），然後雙重登入權限也是一個蠻好玩的概念。</p><hr><h1 id="-組員分工"><a class="anchor hidden-xs" href="#-組員分工" title="-組員分工"><span class="octicon octicon-link"></span></a><img alt=":joy:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/joy.png" title=":joy:"> 組員分工</h1><h3 id="我們還是懶得分工-ˊ・ω・ˋ"><a class="anchor hidden-xs" href="#我們還是懶得分工-ˊ・ω・ˋ" title="我們還是懶得分工-ˊ・ω・ˋ"><span class="octicon octicon-link"></span></a>我們還是懶得分工 (ˊ・ω・ˋ)</h3><p>三人：所有system call + 企劃書 (ˊ・ω・ˋ)</p><hr></div>
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-right dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+                <div class="toc"><ul class="nav">
+<li class=""><a href="#107-OS-homework-3-實作" title="107 OS homework 3 實作">107 OS homework 3 實作</a></li>
+<li class=""><a href="#-使用情境說明包含流程圖" title=" 使用情境說明(包含流程圖)"> 使用情境說明(包含流程圖)</a></li>
+<li class=""><a href="#-Demo畫面" title=" Demo畫面"> Demo畫面</a><ul class="nav">
+<li class="invisable-node"><ul class="nav">
+<li class=""><a href="#開機後顯示請刷學生證" title="開機後顯示請刷學生證">開機後顯示請刷學生證</a></li>
+<li class=""><a href="#雙重權限" title="雙重權限">雙重權限</a></li>
+<li class=""><a href="#rwx-權限系統" title="rwx 權限系統">rwx 權限系統</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class=""><a href="#-實作過程修改哪些檔案含圖片" title=" 實作過程(修改哪些檔案[含圖片])"> 實作過程(修改哪些檔案[含圖片])</a><ul class="nav">
+<li class=""><a href="#檔案修改" title="檔案修改">檔案修改</a><ul class="nav">
+<li class=""><a href="#完整版" title="完整版">完整版</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#-結論" title=" 結論"> 結論</a></li>
+<li><a href="#-組員分工" title=" 組員分工"> 組員分工</a><ul class="nav">
+<li class="invisable-node"><ul class="nav">
+<li><a href="#我們還是懶得分工-ˊ・ω・ˋ" title="我們還是懶得分工 (ˊ・ω・ˋ)">我們還是懶得分工 (ˊ・ω・ˋ)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#">Expand all</a><a class="back-to-top" href="#">Back to top</a><a class="go-to-bottom" href="#">Go to bottom</a></div>
+            </ul>
+        </div>
+    </div>
+    <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;"  >
+        <div class="toc"><ul class="nav">
+<li class=""><a href="#107-OS-homework-3-實作" title="107 OS homework 3 實作">107 OS homework 3 實作</a></li>
+<li class=""><a href="#-使用情境說明包含流程圖" title=" 使用情境說明(包含流程圖)"> 使用情境說明(包含流程圖)</a></li>
+<li class=""><a href="#-Demo畫面" title=" Demo畫面"> Demo畫面</a><ul class="nav">
+<li class="invisable-node"><ul class="nav">
+<li class=""><a href="#開機後顯示請刷學生證" title="開機後顯示請刷學生證">開機後顯示請刷學生證</a></li>
+<li class=""><a href="#雙重權限" title="雙重權限">雙重權限</a></li>
+<li class=""><a href="#rwx-權限系統" title="rwx 權限系統">rwx 權限系統</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class=""><a href="#-實作過程修改哪些檔案含圖片" title=" 實作過程(修改哪些檔案[含圖片])"> 實作過程(修改哪些檔案[含圖片])</a><ul class="nav">
+<li class=""><a href="#檔案修改" title="檔案修改">檔案修改</a><ul class="nav">
+<li class=""><a href="#完整版" title="完整版">完整版</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#-結論" title=" 結論"> 結論</a></li>
+<li><a href="#-組員分工" title=" 組員分工"> 組員分工</a><ul class="nav">
+<li class="invisable-node"><ul class="nav">
+<li><a href="#我們還是懶得分工-ˊ・ω・ˋ" title="我們還是懶得分工 (ˊ・ω・ˋ)">我們還是懶得分工 (ˊ・ω・ˋ)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#">Expand all</a><a class="back-to-top" href="#">Back to top</a><a class="go-to-bottom" href="#">Go to bottom</a></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.6.0/gist-embed.min.js" integrity="sha256-KyF2D6xPIJUW5sUDSs93vWyZm+1RzIpKCexxElmxl8g=" crossorigin="anonymous" defer></script>
+    <script>
+        var markdown = $(".markdown-body");
+        //smooth all hash trigger scrolling
+        function smoothHashScroll() {
+            var hashElements = $("a[href^='#']").toArray();
+            for (var i = 0; i < hashElements.length; i++) {
+                var element = hashElements[i];
+                var $element = $(element);
+                var hash = element.hash;
+                if (hash) {
+                    $element.on('click', function (e) {
+                        // store hash
+                        var hash = this.hash;
+                        if ($(hash).length <= 0) return;
+                        // prevent default anchor click behavior
+                        e.preventDefault();
+                        // animate
+                        $('body, html').stop(true, true).animate({
+                            scrollTop: $(hash).offset().top
+                        }, 100, "linear", function () {
+                            // when done, add hash to url
+                            // (default click behaviour)
+                            window.location.hash = hash;
+                        });
+                    });
+                }
+            }
+        }
+
+        smoothHashScroll();
+        var toc = $('.ui-toc');
+        var tocAffix = $('.ui-affix-toc');
+        var tocDropdown = $('.ui-toc-dropdown');
+        //toc
+        tocDropdown.click(function (e) {
+            e.stopPropagation();
+        });
+
+        var enoughForAffixToc = true;
+
+        function generateScrollspy() {
+            $(document.body).scrollspy({
+                target: ''
+            });
+            $(document.body).scrollspy('refresh');
+            if (enoughForAffixToc) {
+                toc.hide();
+                tocAffix.show();
+            } else {
+                tocAffix.hide();
+                toc.show();
+            }
+            $(document.body).scroll();
+        }
+
+        function windowResize() {
+            //toc right
+            var paddingRight = parseFloat(markdown.css('padding-right'));
+            var right = ($(window).width() - (markdown.offset().left + markdown.outerWidth() - paddingRight));
+            toc.css('right', right + 'px');
+            //affix toc left
+            var newbool;
+            var rightMargin = (markdown.parent().outerWidth() - markdown.outerWidth()) / 2;
+            //for ipad or wider device
+            if (rightMargin >= 133) {
+                newbool = true;
+                var affixLeftMargin = (tocAffix.outerWidth() - tocAffix.width()) / 2;
+                var left = markdown.offset().left + markdown.outerWidth() - affixLeftMargin;
+                tocAffix.css('left', left + 'px');
+            } else {
+                newbool = false;
+            }
+            if (newbool != enoughForAffixToc) {
+                enoughForAffixToc = newbool;
+                generateScrollspy();
+            }
+        }
+        $(window).resize(function () {
+            windowResize();
+        });
+        $(document).ready(function () {
+            windowResize();
+            generateScrollspy();
+        });
+
+        //remove hash
+        function removeHash() {
+            window.location.hash = '';
+        }
+
+        var backtotop = $('.back-to-top');
+        var gotobottom = $('.go-to-bottom');
+
+        backtotop.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToTop)
+                scrollToTop();
+            removeHash();
+        });
+        gotobottom.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToBottom)
+                scrollToBottom();
+            removeHash();
+        });
+
+        var toggle = $('.expand-toggle');
+        var tocExpand = false;
+
+        checkExpandToggle();
+        toggle.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            tocExpand = !tocExpand;
+            checkExpandToggle();
+        })
+
+        function checkExpandToggle () {
+            var toc = $('.ui-toc-dropdown .toc');
+            var toggle = $('.expand-toggle');
+            if (!tocExpand) {
+                toc.removeClass('expand');
+                toggle.text('Expand all');
+            } else {
+                toc.addClass('expand');
+                toggle.text('Collapse all');
+            }
+        }
+
+        function scrollToTop() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: 0
+            }, 100, "linear");
+        }
+
+        function scrollToBottom() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: $(document.body)[0].scrollHeight
+            }, 100, "linear");
+        }
+    </script>
+</body>
+
+</html>
